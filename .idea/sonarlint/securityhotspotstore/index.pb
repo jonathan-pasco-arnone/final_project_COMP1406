@@ -25,3 +25,5 @@ J
 final_project_COMP1406.iml,5\7\57545c35c36b79c3eafe2e64a2dd2b4281008a67
 S
 #.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
+=
+pageView.java,1\2\1280cd864207783465861c7c9bf8257c1490534e

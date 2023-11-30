@@ -2,6 +2,9 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 
 public class crawler {
     public String crawlPathString = "src/crawlData";
@@ -26,7 +29,23 @@ public class crawler {
     }
 
     public void crawl(String seedURL) {
-        new File("src/crawlData").mkdirs();
+        new File(crawlPathString).mkdirs();
         // Do some crawling
+        Dictionary<String, Integer> linkLocations = new Hashtable<>();
+        linkLocations.put(seedURL, 0);
+        ArrayList<String> links = new ArrayList<>();
+        links.add(seedURL);
+
+        Dictionary<String, Integer> wordPerDoc = new Hashtable<>();
+
+        int folderNum = 0;
+        while (folderNum <= links.size()) {
+            String weblink = links.get(0);
+            new File(crawlPathString + "/" + folderNum);
+            //doc_string =
+
+
+            folderNum++;
+        }
     }
 }

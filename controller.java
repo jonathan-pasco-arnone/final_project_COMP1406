@@ -1,19 +1,14 @@
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-// Alert is used for error handling
-import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 import javafx.event.*;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class controller extends Application {
     // Instantiate classes
@@ -59,90 +54,17 @@ public class controller extends Application {
     } */
 
     public void start(Stage primaryStage) {
+        pageView view = new pageView();
+
         Pane aPane = new Pane();
 
         aPane.setPrefSize(1300,600);
         primaryStage.setTitle("Web Crawler and Searcher");
+        primaryStage.setMinWidth(1300);
+        primaryStage.setMinHeight(500);
         primaryStage.setResizable(true);
         primaryStage.setScene(new Scene(aPane));
         primaryStage.show();
-
-        /*
-        *
-        * Crawl
-        *
-        * */
-        Label crawlRequest = new Label("Please input a seed to be crawled");
-        crawlRequest.setFont(new Font(15));
-        crawlRequest.relocate(10, 10);
-
-        TextField crawlTextField = new TextField();
-        // Makes the TextField bigger because the input will be a link and likely rather long
-        crawlTextField.setPrefSize(450, 20);
-        crawlTextField.relocate(10, 40);
-
-        Button crawlButton = new Button("Crawl");
-        crawlButton.relocate(470, 40);
-
-        crawlButton.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent actionEvent) {
-//                initialize();
-//                crawl(crawlTextField.getText());
-                crawlTextField.clear();
-            }
-        });
-
-        /*
-         *
-         * Search Data
-         *
-         * */
-
-
-        /*
-         *
-         * Search
-         *
-         * */
-        Label searchRequest = new Label("What would you like to search for?");
-        searchRequest.setFont(new Font(15));
-        searchRequest.relocate(10, 80);
-
-        TextField searchWordTextField = new TextField();
-        searchWordTextField.setPrefSize(200, 20);
-        searchWordTextField.relocate(10, 110);
-
-        Button searchWordButton = new Button("Search");
-        searchWordButton.relocate(220, 110);
-
-
-        // Page rank checker
-        RadioButton pageRankButton = new RadioButton("Page Rank");
-        pageRankButton.relocate(10, 145);
-
-        // Drop down to select the amount of searches to provide
-        ComboBox searchQuantity = new ComboBox();
-        searchQuantity.relocate(95, 140);
-        int counter = 1;
-        int maxSelection = 20;
-        while (counter <= maxSelection) {
-            searchQuantity.getItems().add(counter);
-            counter++;
-        }
-
-        // Sets the default selection to 10
-        searchQuantity.getSelectionModel().select(9);
-
-        searchWordButton.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent actionEvent) {
-//                search(searchWordTextField.getText(), pageRankButton.isSelected(), (int) searchQuantity.getValue());
-                searchWordTextField.clear();
-            }
-        });
-
-
-        // Creates a screen divider
-        Rectangle screenDivider = new Rectangle(aPane.getWidth() / 2,0,10,9999);
 
         // BackgroundFill object is being made
         // Color.valueOf obviously takes an RGB color code
@@ -153,9 +75,37 @@ public class controller extends Application {
         Background background = new Background(backgroundColor);
         aPane.setBackground(background);
 
+        /*
+        *
+        * Events
+        *
+         */
+        view.getCrawlButton().setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent actionEvent) {
+//                initialize();
+//                crawl(crawlTextField.getText());
+                view.getCrawlTextField().clear();
+            }
+        });
+
+        view.getSearchWordButton().setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent actionEvent) {
+//                search(searchWordTextField.getText(), pageRankButton.isSelected(), (int) searchQuantity.getValue());
+                view.getSearchWordTextField().clear();
+            }
+        });
+
+        // Checks if the width of the screen has changed then updates the necessary objects
+        aPane.widthProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
+                view.getScreenDivider().setX(aPane.getWidth() / 2);
+                view.getTopLinks().relocate(aPane.getWidth() / 2 + 50, 20);
+                view.getTopLinks().relocate(aPane.getWidth() / 2 + 50, 40);
+            }
+        });
+
         // Adding everything to the pane
-        aPane.getChildren().addAll(crawlRequest, crawlTextField, crawlButton, searchRequest, searchWordButton,
-                searchWordTextField, pageRankButton, searchQuantity, screenDivider);
+        aPane.getChildren().addAll(view);
 
     }
 
