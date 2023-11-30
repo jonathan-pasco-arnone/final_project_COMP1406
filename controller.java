@@ -16,7 +16,7 @@ public class controller extends Application {
     public searchData searchDataClass = new searchData();
     public searchPrompt searchClass = new searchPrompt();
 
-   /* public void initialize() {
+   public void initialize() {
         crawlClass.initialize();
     }
 
@@ -24,7 +24,7 @@ public class controller extends Application {
         crawlClass.crawl(seedURL);
     }
 
-    public List<String> getOutgoingLinks(String url) {
+    /*public List<String> getOutgoingLinks(String url) {
         searchDataClass.getOutgoingLinks(url);
     }
 
@@ -82,8 +82,8 @@ public class controller extends Application {
          */
         view.getCrawlButton().setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent actionEvent) {
-//                initialize();
-//                crawl(crawlTextField.getText());
+                initialize();
+                crawl(view.getCrawlTextField().getText());
                 view.getCrawlTextField().clear();
             }
         });
@@ -98,9 +98,7 @@ public class controller extends Application {
         // Checks if the width of the screen has changed then updates the necessary objects
         aPane.widthProperty().addListener(new ChangeListener<Number>() {
             public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
-                view.getScreenDivider().setX(aPane.getWidth() / 2);
-                view.getTopLinks().relocate(aPane.getWidth() / 2 + 50, 20);
-                view.getTopLinks().relocate(aPane.getWidth() / 2 + 50, 40);
+                view.updateOrganization(aPane.getWidth() / 2);
             }
         });
 

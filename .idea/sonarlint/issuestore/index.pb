@@ -27,3 +27,7 @@ S
 #.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
 =
 pageView.java,1\2\1280cd864207783465861c7c9bf8257c1490534e
+A
+SearchResult.java,b\3\b3c07757effadcedddecba6858c6f74740638e0d
+A
+WebRequester.java,c\c\cc2d9298fe405798879703b2db98a5702953986a

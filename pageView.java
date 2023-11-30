@@ -31,6 +31,11 @@ public class pageView extends Pane {
     public ListView<String> getTopLinks() { return topLinks; }
     public Label getTopLinksLabel() { return topLinksLabel; }
     public Rectangle getScreenDivider() { return screenDivider; }
+    public void updateOrganization(double newWidth) {
+        screenDivider.setX(newWidth);
+        topLinks.relocate(newWidth + 50, 40);
+        topLinksLabel.relocate(newWidth + 50, 20);
+    }
     public pageView() {
         /*
          *
@@ -94,6 +99,7 @@ public class pageView extends Pane {
         topLinksLabel.setFont(Font.font("verdana", 15));;
 
         getChildren().addAll(crawlTextField, crawlRequest, crawlButton, searchRequest, searchWordTextField,
-                searchWordButton, pageRankButton, searchQuantity, searchQuantityRequest, topLinks, screenDivider);
+                searchWordButton, pageRankButton, searchQuantity, searchQuantityRequest, topLinks, screenDivider,
+                topLinksLabel);
     }
 }
