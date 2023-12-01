@@ -42,36 +42,50 @@ public class Crawler extends FileControl {
                 StringBuilder new_text = new StringBuilder();
                 int index = 0;
                 while (index < docString.length()) {
-//                    System.out.println(index + "The character: " + docString.substring(index, index + 1));
-//                    System.out.println("Current text: " + new_text);
 
-                    // Determines if the current character is within any of the opening sections
                     if (!edit_text) {
-                        if ("<title>".equals(docString.substring(index, index + 7))) {
-                            edit_text = true;
-                            index += 6;
-                        } else if ("<p>".equals(docString.substring(index, index + 3))) {
+                        // Determines if the current character is within any of the opening sections
+                        if ("<p>".equals(docString.substring(index, index + 3))) {
                             edit_text = true;
                             index += 2;
+                        } else if ("<title>".equals(docString.substring(index, index + 7))) {
+                            edit_text = true;
+                            index += 6;
                         } else if ("<a href=\"".equals(docString.substring(index, index + 9))) {
                             edit_text = true;
                             index += 8;
                         }
                     } else {
 
+                        // Parses the text
                         if ("</p>".equals(docString.substring(index, index + 4))) {
-                            writeFile(new_text.toString(), folderNum, "/page_text.txt");
+                            writeFile(new_text.toString(), String.valueOf(folderNum), "/page_text.txt");
                             edit_text = false;
                             new_text = new StringBuilder();
-                        } else if ("\">".equals(docString.substring(index, index + 2))) {
 
-                            writeFile(new_text.toString(), folderNum, "/outgoing_links.txt");
+                        // Parses the links
+                        } else if ("\">".equals(docString.substring(index, index + 2))) {
+                            // Is the link local
+                            if (!new_text.substring(0, 7).equals("http://")) {
+                                int counter = weblink.length() - 1;
+                                while (counter >= 0) {
+                                    if (!weblink.substring(counter, counter + 1).equals("/")) {
+                                        break;
+                                    }
+                                    counter--;
+                                }
+                                new_text = new StringBuilder(weblink.substring(0,counter) + new_text);
+                            }
+
+                            writeFile(new_text.toString(), String.valueOf(folderNum), "/outgoing_links.txt");
                             edit_text = false;
                             new_text = new StringBuilder();
+
+                        // Parses the title
                         } else if ("</title>".equals(docString.substring(index, index + 8))) {
                             // Adds the title and link of the website to a file
                             new_text.append("\n").append(weblink);
-                            writeFile(new_text.toString(), folderNum, "/title_and_link.txt");
+                            writeFile(new_text.toString(), String.valueOf(folderNum), "/title_and_link.txt");
                             edit_text = false;
                             new_text = new StringBuilder();
 
@@ -83,13 +97,12 @@ public class Crawler extends FileControl {
 
                     index++;
                 }
-            } catch (MalformedURLException e) {
-                // If the link is invalid then there is no point in proceeding
-            } catch(IOException e) {
-                // If the link is invalid then there is no point in continuing
-            } catch (StringIndexOutOfBoundsException e) {
-                // Will happen at the end of every file reading because the program will attempt to read past the last
-                // characters
+            } catch (IOException | StringIndexOutOfBoundsException e) {
+                // IOException will happen if the link is invalid then there is no point in
+                // continuing
+
+                // StringIndexOutOfBoundsException will happen at the end of every file reading because the program
+                // will attempt to read past the last characters
             }
 
             folderNum++;
