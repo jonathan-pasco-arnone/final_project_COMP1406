@@ -1,5 +1,4 @@
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -7,23 +6,41 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
+import java.util.Scanner;
 
 public class crawler {
-    public String crawlPathString = "src/crawlData";
+    public String crawlPathString = "crawlData";
     public Path crawlPath = Paths.get(crawlPathString);
 
+    private void writeFile(String new_text, int folderNum, String filename) throws IOException {
+        // Checks if the file already exists. If so, then copy the current contents and add it to the new_text
+        if (Files.exists(Path.of("./" + crawlPathString + "/" + folderNum + filename))) {
+            File oldFile = new File("./" + crawlPathString + "/" + folderNum + filename);
+
+            // Scanner objects are capable of reading files
+            Scanner fileReader = new Scanner(oldFile);
+            StringBuilder data = new StringBuilder();
+            while (fileReader.hasNextLine()) {
+                data.append(fileReader.nextLine()).append("\n");
+            }
+            fileReader.close();
+            new_text = data + new_text;
+            oldFile.delete();
+        }
+        // The try-with-resources below attempts to open the file and will close it when done (or it will throw an
+        // exception if one occurs)
+        try (FileWriter file = new FileWriter("./" + crawlPathString + "/" + folderNum + filename)) {
+            file.write(new_text);
+        }
+    }
     public void initialize() {
         // Deletes all the folders and files
         if (Files.exists(crawlPath)) {
             File[] directories = new File(crawlPathString).listFiles(File::isDirectory);
             for (File folder : directories) {
-                File[] subDirectories = new File(folder.getPath()).listFiles(File::isDirectory);
-                for (File subFolder : subDirectories) {
-                    File[] allFiles = new File(subFolder.getPath()).listFiles();
-                    for (File individualFile : allFiles) {
-                        individualFile.delete();
-                    }
-                    subFolder.delete();
+                File[] allFiles = new File(folder.getPath()).listFiles();
+                for (File individualFile : allFiles) {
+                    individualFile.delete();
                 }
                 folder.delete();
             }
@@ -42,45 +59,50 @@ public class crawler {
 
         int folderNum = 0;
         while (folderNum < links.size()) {
+            new File(crawlPathString + "/" + folderNum).mkdirs();
             String weblink = links.get(folderNum);
-            new File(crawlPathString + "/" + folderNum);
             boolean linkExists = false;
             try {
                 String docString = WebRequester.readURL(weblink);
-                // The "edit" variables are used in the following while loop to indicate whether the loop
-                // should start/end adding to the title/text/link of the new key/paragraph/url
                 boolean edit_text = false;
-                String new_text = "";
+                StringBuilder new_text = new StringBuilder();
                 int index = 0;
                 while (index < docString.length()) {
-                    System.out.println(index);
+//                    System.out.println(index + "The character: " + docString.substring(index, index + 1));
+//                    System.out.println("Current text: " + new_text);
 
                     // Determines if the current character is within any of the opening sections
                     if (!edit_text) {
                         if ("<title>".equals(docString.substring(index, index + 7))) {
                             edit_text = true;
-                            index += 7;
+                            index += 6;
                         } else if ("<p>".equals(docString.substring(index, index + 3))) {
                             edit_text = true;
-                            index += 3;
+                            index += 2;
                         } else if ("<a href=\"".equals(docString.substring(index, index + 9))) {
                             edit_text = true;
-                            index += 9;
+                            index += 8;
                         }
                     } else {
 
                         if ("</p>".equals(docString.substring(index, index + 4))) {
-
+                            writeFile(new_text.toString(), folderNum, "/page_text.txt");
+                            edit_text = false;
+                            new_text = new StringBuilder();
                         } else if ("\">".equals(docString.substring(index, index + 2))) {
 
+                            writeFile(new_text.toString(), folderNum, "/outgoing_links.txt");
+                            edit_text = false;
+                            new_text = new StringBuilder();
                         } else if ("</title>".equals(docString.substring(index, index + 8))) {
                             // Adds the title and link of the website to a file
-                            new File(crawlPathString + "/" + folderNum + "/title_and_link.txt").createNewFile();
-//                        file.write(new_key + "\n" + weblink + "\n");
-//                        file.close();
+                            new_text.append("\n").append(weblink);
+                            writeFile(new_text.toString(), folderNum, "/title_and_link.txt");
                             edit_text = false;
-                            System.out.println("ye the index is: " + index);
+                            new_text = new StringBuilder();
 
+                        } else {
+                            new_text.append(docString.substring(index, index + 1));
                         }
                     }
 
@@ -91,6 +113,9 @@ public class crawler {
                 // If the link is invalid then there is no point in proceeding
             } catch(IOException e) {
                 // If the link is invalid then there is no point in continuing
+            } catch (StringIndexOutOfBoundsException e) {
+                // Will happen at the end of every file reading because the program will attempt to read past the last
+                // Characters
             }
 
             folderNum++;
