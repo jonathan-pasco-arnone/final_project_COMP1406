@@ -1,12 +1,10 @@
 import java.io.*;
-import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.Hashtable;
 
-public class Crawler extends FileControl {
+public class Crawler extends FileControl implements Serializable {
     public void initialize() {
         // Deletes all the folders and files
         if (Files.exists(Paths.get(crawlPathString))) {
@@ -17,6 +15,12 @@ public class Crawler extends FileControl {
                     individualFile.delete();
                 }
                 folder.delete();
+            }
+        }
+        if (Files.exists(Paths.get(parsedPathString))) {
+            File[] files = new File(parsedPathString).listFiles();
+            for (File sinlgeFile : files) {
+                sinlgeFile.delete();
             }
         }
     }
@@ -139,6 +143,20 @@ public class Crawler extends FileControl {
                     writeFile(currentLink, linkLocations.get(outgoingLink).toString(), "/incoming_links.txt");
                 }
             }
+
+            new File(parsedPathString).mkdir();
+
+            // Serializing
+            FileOutputStream linkLocationFile = new FileOutputStream(parsedPathString + "/link_locations.txt");
+            ObjectOutputStream outputtingLinkLocations = new ObjectOutputStream(linkLocationFile);
+            outputtingLinkLocations.writeObject(linkLocations);
+            outputtingLinkLocations.close();
+
+            FileOutputStream idfFile = new FileOutputStream(parsedPathString + "/idf.txt");
+            ObjectOutputStream outputtingIdf = new ObjectOutputStream(idfFile);
+            outputtingIdf.writeObject(wordPerDoc);
+            outputtingIdf.close();
+
 
         } catch (IOException e) {
             // IOException will happen if the link is invalid then there is no point in

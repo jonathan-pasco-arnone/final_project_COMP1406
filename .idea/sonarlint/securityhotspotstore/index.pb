@@ -71,3 +71,7 @@ N
 crawlData/3/incoming_links.txt,7\0\70b950d5fcc5a485370a63724c2547ac9cc61da1
 N
 crawlData/4/incoming_links.txt,6\8\687e7f7c1ccc63d2a37d141f45d698d2aa7b1f20
+M
+parsedData/link_locations.txt,a\1\a1ec006d2053da033d7a24aa7d64bcf48488d396
+B
+parsedData/idf.txt,3\8\3843678ce3d741d5d34570e029da8a2f317ef4b7

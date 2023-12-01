@@ -1,6 +1,7 @@
 import java.io.*;
 
 public class FileControl {
+    public String parsedPathString = "parsedData";
     public String crawlPathString = "crawlData";
     public String readFile(String path, String filename) throws IOException {
         StringBuilder data = new StringBuilder();
