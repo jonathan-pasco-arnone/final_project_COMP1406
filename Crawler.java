@@ -1,41 +1,15 @@
 import java.io.*;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
-import java.util.Scanner;
 
-public class crawler {
-    public String crawlPathString = "crawlData";
-    public Path crawlPath = Paths.get(crawlPathString);
-
-    private void writeFile(String new_text, int folderNum, String filename) throws IOException {
-        // Checks if the file already exists. If so, then copy the current contents and add it to the new_text
-        if (Files.exists(Path.of("./" + crawlPathString + "/" + folderNum + filename))) {
-            File oldFile = new File("./" + crawlPathString + "/" + folderNum + filename);
-
-            // Scanner objects are capable of reading files
-            Scanner fileReader = new Scanner(oldFile);
-            StringBuilder data = new StringBuilder();
-            while (fileReader.hasNextLine()) {
-                data.append(fileReader.nextLine()).append("\n");
-            }
-            fileReader.close();
-            new_text = data + new_text;
-            oldFile.delete();
-        }
-        // The try-with-resources below attempts to open the file and will close it when done (or it will throw an
-        // exception if one occurs)
-        try (FileWriter file = new FileWriter("./" + crawlPathString + "/" + folderNum + filename)) {
-            file.write(new_text);
-        }
-    }
+public class Crawler extends FileControl {
     public void initialize() {
         // Deletes all the folders and files
-        if (Files.exists(crawlPath)) {
+        if (Files.exists(Paths.get(crawlPathString))) {
             File[] directories = new File(crawlPathString).listFiles(File::isDirectory);
             for (File folder : directories) {
                 File[] allFiles = new File(folder.getPath()).listFiles();
@@ -102,7 +76,7 @@ public class crawler {
                             new_text = new StringBuilder();
 
                         } else {
-                            new_text.append(docString.substring(index, index + 1));
+                            new_text.append(docString.charAt(index));
                         }
                     }
 
@@ -115,7 +89,7 @@ public class crawler {
                 // If the link is invalid then there is no point in continuing
             } catch (StringIndexOutOfBoundsException e) {
                 // Will happen at the end of every file reading because the program will attempt to read past the last
-                // Characters
+                // characters
             }
 
             folderNum++;

@@ -1,6 +1,4 @@
-import java.util.List;
-
-public class searchData {
+public class SearchData {
     /*public List<String> getOutgoingLinks(String url) {
 
     }

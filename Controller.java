@@ -6,15 +6,14 @@ import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.collections.FXCollections;
 import javafx.event.*;
 
 
-public class controller extends Application {
+public class Controller extends Application {
     // Instantiate classes
-    public crawler crawlClass = new crawler();
-    public searchData searchDataClass = new searchData();
-    public searchPrompt searchClass = new searchPrompt();
+    public Crawler crawlClass = new Crawler();
+    public SearchData searchDataClass = new SearchData();
+    public SearchPrompt searchClass = new SearchPrompt();
 
    public void initialize() {
         crawlClass.initialize();
@@ -54,7 +53,7 @@ public class controller extends Application {
     } */
 
     public void start(Stage primaryStage) {
-        pageView view = new pageView();
+        PageView view = new PageView();
 
         Pane aPane = new Pane();
 

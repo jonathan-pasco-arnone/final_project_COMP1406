@@ -3,9 +3,8 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 
-public class pageView extends Pane {
+public class PageView extends Pane {
 
     // Variables
     private TextField crawlTextField = new TextField();
@@ -36,7 +35,7 @@ public class pageView extends Pane {
         topLinks.relocate(newWidth + 50, 40);
         topLinksLabel.relocate(newWidth + 50, 20);
     }
-    public pageView() {
+    public PageView() {
         /*
          *
          * Crawl
