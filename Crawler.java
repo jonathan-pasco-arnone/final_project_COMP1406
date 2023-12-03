@@ -39,7 +39,7 @@ public class Crawler extends FileControl implements Serializable {
 
             int folderNum = 0;
             while (folderNum < links.size()) {
-                new File(crawlPathString + "/" + folderNum).mkdirs();
+                new File(crawlPathString + folderNum).mkdirs();
                 String weblink = links.get(folderNum);
                 boolean linkExists = false;
                     String docString = WebRequester.readURL(weblink);
@@ -74,7 +74,7 @@ public class Crawler extends FileControl implements Serializable {
 
                             // Parses the text
                             if ("</p>".equals(docString.substring(index, index + 4))) {
-                                writeFile(new_text.toString(), String.valueOf(folderNum), "/page_text.txt");
+                                writeFile(new_text.toString(), crawlPathString + String.valueOf(folderNum), "/page_text.txt");
                                 // Adds the amount of times the word appears in the doc
                                 // The "\\R" splits the string into an array of strings separated by new lines
                                 for (String word : docString.split("\\R")) {
@@ -109,7 +109,7 @@ public class Crawler extends FileControl implements Serializable {
                                     links.add(new_text.toString());
                                 }
 
-                                writeFile(new_text.toString(), String.valueOf(folderNum), "/outgoing_links.txt");
+                                writeFile(new_text.toString(), crawlPathString + String.valueOf(folderNum), "/outgoing_links.txt");
                                 edit_text = false;
                                 new_text = new StringBuilder();
 
@@ -117,7 +117,7 @@ public class Crawler extends FileControl implements Serializable {
                             } else if ("</title>".equals(docString.substring(index, index + 8))) {
                                 // Adds the title and link of the website to a file
                                 new_text.append("\n").append(weblink);
-                                writeFile(new_text.toString(), String.valueOf(folderNum), "/title_and_link.txt");
+                                writeFile(new_text.toString(), crawlPathString + String.valueOf(folderNum), "/title_and_link.txt");
                                 edit_text = false;
                                 new_text = new StringBuilder();
 
@@ -134,13 +134,13 @@ public class Crawler extends FileControl implements Serializable {
             File[] directories = new File(crawlPathString).listFiles(File::isDirectory);
             for (File folder : directories) {
                 // Grabs the current folder's link
-                String currentLink = readFile(folder.getName(), "/title_and_link.txt").split("\\R")[1];
+                String currentLink = readFile(crawlPathString + folder.getName(), "/title_and_link.txt").split("\\R")[1];
 
                 // For each of the outgoing links
-                for (String outgoingLink : readFile(folder.getName(),
+                for (String outgoingLink : readFile(crawlPathString + folder.getName(),
                         "/outgoing_links.txt").split("\\R")) {
                     // Add link to the current incoming links file
-                    writeFile(currentLink, linkLocations.get(outgoingLink).toString(), "/incoming_links.txt");
+                    writeFile(currentLink, crawlPathString + linkLocations.get(outgoingLink).toString(), "/incoming_links.txt");
                 }
             }
 
@@ -157,6 +157,30 @@ public class Crawler extends FileControl implements Serializable {
             outputtingIdf.writeObject(wordPerDoc);
             outputtingIdf.close();
 
+            /*
+            *
+            * Page rank calculation
+            *
+            * */
+
+            // The main matrix of the problem
+            ArrayList<ArrayList<Integer>> probabilityMatrix = new ArrayList<>();
+            ArrayList<ArrayList<Integer>> basicVector = new ArrayList<>();
+            basicVector.add(new ArrayList<>());
+
+            // Generates the amount of rows needed (aka the amount of websites attached to the seed)
+            int counter = 0;
+            while (counter != linkLocations.size()) {
+                probabilityMatrix.add(new ArrayList<>());
+                basicVector.get(0).add(0);
+                counter++;
+            }
+
+            basicVector.get(0).set(0, 1);
+
+//            for (String link : linkLocations.keySet()) {
+//
+//            }
 
         } catch (IOException e) {
             // IOException will happen if the link is invalid then there is no point in

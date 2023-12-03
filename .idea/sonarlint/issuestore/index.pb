@@ -29,8 +29,6 @@ A
 WebRequester.java,c\c\cc2d9298fe405798879703b2db98a5702953986a
 N
 crawlData/0/title_and_link.txt,c\f\cf5dbb3401d1576b9b2d6d9617952848bb02fb31
-S
-#crawlData/0/didididididiytyehfiuhei,b\1\b120a3beca0dd296cd5313ab06c4c7e1e90ff617
 N
 crawlData/0/outgoing_links.txt,9\8\981af638a969692d96cb0df7c871bac3d08dc2b2
 I
@@ -75,3 +73,5 @@ M
 parsedData/link_locations.txt,a\1\a1ec006d2053da033d7a24aa7d64bcf48488d396
 B
 parsedData/idf.txt,3\8\3843678ce3d741d5d34570e029da8a2f317ef4b7
+N
+crawlData/3/title_and_link.txt,0\c\0cd13b498201d6a8ff6719843720423d5ff317a1
