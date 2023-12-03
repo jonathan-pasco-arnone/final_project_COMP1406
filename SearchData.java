@@ -52,9 +52,8 @@ public class SearchData extends FileControl {
             return 0;
         }
 
-        String fileText = readFile(crawlPathString + linkLocations.get(url), "page_text.txt");
+        String fileText = readFile(crawlPathString + linkLocations.get(url), "/page_text.txt");
         String[] wordList = fileText.split("\\R");
-        System.out.println(wordList);
         for (String singleWord : wordList) {
             if (singleWord.equals(word)) {
                 timeWordAppears++;

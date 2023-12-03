@@ -4,6 +4,17 @@ import java.util.Hashtable;
 public class FileControl {
     public String parsedPathString = "parsedData/";
     public String crawlPathString = "crawlData/";
+    public boolean serialize(String path, String filename, Object object) {
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(path + filename);
+            ObjectOutputStream outputtingLinkLocations = new ObjectOutputStream(fileOutputStream);
+            outputtingLinkLocations.writeObject(object);
+            outputtingLinkLocations.close();
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
     public Hashtable<String, Integer> parseHashTable(String path, String filename) {
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(path
                 + filename))) {

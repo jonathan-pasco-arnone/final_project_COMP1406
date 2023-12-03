@@ -103,7 +103,6 @@ public class Controller extends Application {
 
         // Adding everything to the pane
         aPane.getChildren().addAll(view);
-        System.out.println(searchDataClass.getTF("https://people.scs.carleton.ca/~davidmckenney/tinyfruits/N-5.html", "orange"));
 
     }
 

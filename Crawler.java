@@ -3,6 +3,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 
 public class Crawler extends FileControl implements Serializable {
     public void initialize() {
@@ -147,15 +148,8 @@ public class Crawler extends FileControl implements Serializable {
             new File(parsedPathString).mkdir();
 
             // Serializing
-            FileOutputStream linkLocationFile = new FileOutputStream(parsedPathString + "/link_locations.txt");
-            ObjectOutputStream outputtingLinkLocations = new ObjectOutputStream(linkLocationFile);
-            outputtingLinkLocations.writeObject(linkLocations);
-            outputtingLinkLocations.close();
-
-            FileOutputStream idfFile = new FileOutputStream(parsedPathString + "/idf.txt");
-            ObjectOutputStream outputtingIdf = new ObjectOutputStream(idfFile);
-            outputtingIdf.writeObject(wordPerDoc);
-            outputtingIdf.close();
+            serialize(parsedPathString, "link_locations.txt", linkLocations);
+            serialize(parsedPathString, "idf.txt", wordPerDoc);
 
             /*
             *
@@ -164,30 +158,70 @@ public class Crawler extends FileControl implements Serializable {
             * */
 
             // The main matrix of the problem
-            ArrayList<ArrayList<Integer>> probabilityMatrix = new ArrayList<>();
-            ArrayList<ArrayList<Integer>> basicVector = new ArrayList<>();
-            basicVector.add(new ArrayList<>());
+            double[][] probabilityMatrix = new double[linkLocations.size()][linkLocations.size()];
+            double[] basicVector = new double[linkLocations.size()];
+            double alpha = 0.1;
 
-            // Generates the amount of rows needed (aka the amount of websites attached to the seed)
-            int counter = 0;
-            while (counter != linkLocations.size()) {
-                probabilityMatrix.add(new ArrayList<>());
-                basicVector.get(0).add(0);
-                counter++;
+            basicVector[0] = 1;
+
+            // Fill out the probability matrix
+            for (String link : linkLocations.keySet()) {
+                SearchData searchDataInstance = new SearchData();
+                List<String> incomingLinks =  searchDataInstance.getIncomingLinks(link);
+                double chancePerPage = (double) 1 / incomingLinks.size();
+
+                // Add the default value
+                int count = 0;
+                while (count != probabilityMatrix[linkLocations.get(link)].length) {
+                    probabilityMatrix[linkLocations.get(link)][count] = alpha / linkLocations.size();
+                    count++;
+                }
+
+                // Add the probability of each incoming page
+                for (String singleIncomingLink : incomingLinks) {
+                    probabilityMatrix[linkLocations.get(link)][linkLocations.get(singleIncomingLink)] = chancePerPage
+                            * (1 - alpha) + alpha / linkLocations.size();
+                }
             }
 
-            basicVector.get(0).set(0, 1);
+            double[] vectorB = new double[linkLocations.size()];
+            double euclideanDistance = 1;
+            while (euclideanDistance > 0.0001) {
+                vectorB = basicVector;
 
-//            for (String link : linkLocations.keySet()) {
-//
-//            }
+                // Multiply the matrix by the vector
+                double[] newVector = new double[linkLocations.size()];
+                int columnIndexProbabilityMatrix = 0;
+                // Cycles through each column of the probability matrix
+                while (columnIndexProbabilityMatrix != probabilityMatrix[0].length) {
+                    int columnIndexBasicVector = 0;
+                    double newValue = 0;
+                    for (double[] rowProbabilityMatrix : probabilityMatrix) {
+                        newValue += basicVector[columnIndexBasicVector]
+                                * rowProbabilityMatrix[columnIndexProbabilityMatrix];
+                        columnIndexBasicVector++;
+                    }
+                    newVector[columnIndexProbabilityMatrix] = newValue;
+                    columnIndexProbabilityMatrix++;
+                }
+
+                basicVector = newVector;
+
+                // Calculate euclidean distance
+                euclideanDistance = 0;
+                int index = 0;
+                while (index != vectorB.length) {
+                    euclideanDistance += Math.pow(vectorB[index] - basicVector[index], 2);
+                    index++;
+                }
+                euclideanDistance = Math.sqrt(euclideanDistance);
+            }
+
+//            serialize(parsedPathString, "")
 
         } catch (IOException e) {
-            // IOException will happen if the link is invalid then there is no point in
-            // continuing
-
-            // StringIndexOutOfBoundsException will happen at the end of every file reading because the program
-            // will attempt to read past the last characters
+            // IOException will happen if the link is invalid
+            // In which case, there is no point in continuing
         }
     }
 }
