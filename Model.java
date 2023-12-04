@@ -47,7 +47,7 @@ public class Model implements ProjectTester {
     }
 
     public List<SearchResult> search(String query, boolean boost, int X) {
-        return null;// searchClass.search(query, boost, X);
+        return searchClass.search(query, boost, X);
     }
 
 }

@@ -1,15 +1,5 @@
-lime
-papaya
-peach
+
+banana
 apricot
 kiwi
 blueberry
-lime
-lime
-banana
-papaya
-apple
-apricot
-papaya
-apricot
-lime

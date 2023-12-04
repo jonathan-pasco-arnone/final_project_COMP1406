@@ -8,9 +8,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.event.*;
 
-import java.util.List;
-
-
 public class Controller extends Application {
 
     public void start(Stage primaryStage) {
@@ -52,7 +49,9 @@ public class Controller extends Application {
 
         view.getSearchWordButton().setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent actionEvent) {
-//                model.search(searchWordTextField.getText(), pageRankButton.isSelected(), (int) searchQuantity.getValue());
+                // Calls the search action and updates the table together in one line
+                view.updateTable(model.search(view.getSearchWordTextField().getText(),
+                        view.getPageRankButton().isSelected(), (int) view.getSearchQuantity().getValue()));
                 view.getSearchWordTextField().clear();
             }
         });

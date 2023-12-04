@@ -29,13 +29,16 @@ public class FileControl {
             BufferedReader fileReader = new BufferedReader(file);
             String line = fileReader.readLine();
             while (line != null) {
-                data.append(line).append("\n");
+                // This is to make sure no empty lines get put in
+                if (!line.isEmpty()) {
+                    data.append(line).append("\n");
+                }
                 line = fileReader.readLine();
             }
             file.close();
         } catch (IOException e) {
             // Should never reach this case if inputted file is name and folder is correct
-            return "File Not Found";
+            return null;
         }
         return data.toString();
     }
@@ -43,7 +46,7 @@ public class FileControl {
         // First read the contents of the file
         String contents = readFile(path, filename);
         // If the file was found
-        if (!contents.equals("File Not Found")) {
+        if (contents != null) {
             new_text = contents + new_text;
         }
         // Write everything to the new file

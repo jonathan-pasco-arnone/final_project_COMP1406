@@ -4,21 +4,23 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
+import java.util.List;
+
 public class PageView extends Pane {
 
     // Variables
-    private TextField crawlTextField = new TextField();
-    private Label crawlRequest = new Label("Please input a seed to be crawled");
-    private Button crawlButton = new Button("Crawl");
-    private Label searchRequest = new Label("What would you like to search for?");
-    private TextField searchWordTextField = new TextField();
-    private Button searchWordButton = new Button("Search");
-    private RadioButton pageRankButton = new RadioButton("Page Rank");
-    private ComboBox searchQuantity = new ComboBox();
-    private Label searchQuantityRequest = new Label("How many search results?");
-    private ListView<String> topLinks = new ListView<String>();
-    private Label topLinksLabel = new Label("Top " + searchQuantity.getValue() + " links:");
-    private Rectangle screenDivider = new Rectangle(650,0,10,9999);
+    private TextField crawlTextField;
+    private Label crawlRequest;
+    private Button crawlButton;
+    private Label searchRequest;
+    private TextField searchWordTextField;
+    private Button searchWordButton;
+    private RadioButton pageRankButton;
+    private ComboBox searchQuantity;
+    private Label searchQuantityRequest;
+    private ListView<SearchResult> topLinks;
+    private Label topLinksLabel;
+    private Rectangle screenDivider;
 
     // Getters
     public TextField getCrawlTextField() { return crawlTextField; }
@@ -27,15 +29,32 @@ public class PageView extends Pane {
     public Button getSearchWordButton() { return searchWordButton; }
     public RadioButton getPageRankButton() { return pageRankButton; }
     public ComboBox getSearchQuantity() { return searchQuantity; }
-    public ListView<String> getTopLinks() { return topLinks; }
+    public ListView<SearchResult> getTopLinks() { return topLinks; }
     public Label getTopLinksLabel() { return topLinksLabel; }
     public Rectangle getScreenDivider() { return screenDivider; }
+    public void updateTable(List<SearchResult> topResults) {
+        topLinksLabel = new Label("Top " + searchQuantity.getValue() + " links:");
+        topLinks.getItems().addAll(topResults);
+    }
     public void updateOrganization(double newWidth) {
         screenDivider.setX(newWidth);
         topLinks.relocate(newWidth + 50, 40);
         topLinksLabel.relocate(newWidth + 50, 20);
     }
     public PageView() {
+        // Initializing every variable
+        crawlTextField = new TextField();
+        crawlRequest = new Label("Please input a seed to be crawled");
+        crawlButton = new Button("Crawl");
+        searchRequest = new Label("What would you like to search for?");
+        searchWordTextField = new TextField();
+        searchWordButton = new Button("Search");
+        pageRankButton = new RadioButton("Page Rank");
+        searchQuantity = new ComboBox();
+        searchQuantityRequest = new Label("How many search results?");
+        topLinks = new ListView<>();
+        topLinksLabel = new Label("Top links:");
+        screenDivider = new Rectangle(650,0,10,9999);
         /*
          *
          * Crawl

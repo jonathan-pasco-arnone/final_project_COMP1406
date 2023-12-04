@@ -17,6 +17,11 @@ public class SearchData extends FileControl {
 
         String outgingString = readFile(crawlPathString + linkLocations.get(url),
                 "/outgoing_links.txt");
+
+        if (outgingString == null) {
+            return null;
+        }
+
         return new ArrayList<>(Arrays.asList(outgingString.split("\\R")));
     }
 
@@ -30,6 +35,11 @@ public class SearchData extends FileControl {
 
         String incomingString = readFile(crawlPathString + linkLocations.get(url),
                 "/incoming_links.txt");
+
+        if (incomingString == null) {
+            return null;
+        }
+
         return new ArrayList<>(Arrays.asList(incomingString.split("\\R")));
     }
 
@@ -39,8 +49,8 @@ public class SearchData extends FileControl {
 
         double[] pageRanks = (double[]) deserialize(parsedPathString, "page_ranks.txt");
 
-        if (linkLocations == null || pageRanks == null) {
-            return 0;
+        if (linkLocations == null || pageRanks == null || linkLocations.get(url) == null) {
+            return -1;
         }
 
         return pageRanks[linkLocations.get(url)];
@@ -52,7 +62,7 @@ public class SearchData extends FileControl {
                 deserialize(parsedPathString, "link_locations.txt");
         Hashtable<String, Integer> idfs = (Hashtable<String, Integer>)
                 deserialize(parsedPathString, "idf.txt");
-        if (linkLocations == null || idfs == null) {
+        if (linkLocations == null || idfs == null || idfs.get(word) == null) {
             return 0;
         }
         return log((double) linkLocations.size() / (1 + idfs.get(word))) / log(2);
@@ -64,12 +74,11 @@ public class SearchData extends FileControl {
         Hashtable<String, Integer> linkLocations = (Hashtable<String, Integer>)
                 deserialize(parsedPathString, "link_locations.txt");
 
-        if (linkLocations == null) {
+        if (linkLocations == null || linkLocations.get(url) == null) {
             return 0;
         }
 
         String fileText = readFile(crawlPathString + linkLocations.get(url), "/page_text.txt");
-        // The reason for the substring is to eliminate the first new line
         String[] wordList = fileText.split("\\R");
         for (String singleWord : wordList) {
             if (singleWord.equals(word)) {

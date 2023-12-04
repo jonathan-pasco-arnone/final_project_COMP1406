@@ -1,6 +1,6 @@
 public class Fruits4AllTester {
     public static void main(String[] args) throws Exception {
-        ProjectTester tester = new ProjectTesterImp(); //Instantiate your own ProjectTester instance here
+        ProjectTester tester = new Model(); //Instantiate your own ProjectTester instance here
         tester.initialize();
         tester.crawl("https://people.scs.carleton.ca/~davidmckenney/fruits4/N-0.html");
 

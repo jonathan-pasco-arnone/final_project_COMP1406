@@ -63,9 +63,7 @@ public class Crawler extends FileControl implements Serializable {
                                 }
                                 if ("<p>".equals(docString.substring(index, index + 3))) {
                                     edit_text = true;
-                                    // Would be +2 but since the <p> tag always has a new line after it, an additional
-                                    // +1 is added
-                                    index += 3;
+                                    index += 2;
                                 }
                             } else {
                                 break;
@@ -77,7 +75,6 @@ public class Crawler extends FileControl implements Serializable {
                                 writeFile(new_text.toString(), crawlPathString + String.valueOf(folderNum), "/page_text.txt");
                                 // Adds the amount of times the word appears in the doc
                                 // The "\\R" splits the string into an array of strings separated by new lines
-                                // Using a tree set ensures no duplicates
                                 for (String word : new TreeSet<>(Arrays.asList(docString.split("\\R")))) {
                                     if (!wordPerDoc.containsKey(word)) {
                                         wordPerDoc.put(word, 1);
