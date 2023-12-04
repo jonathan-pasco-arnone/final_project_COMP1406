@@ -1,6 +1,9 @@
 import java.util.*;
 
+import java.time.LocalDateTime;
+
 import static java.lang.Math.log;
+import static java.lang.System.currentTimeMillis;
 
 public class Search extends FileControl {
 
@@ -13,22 +16,27 @@ public class Search extends FileControl {
         String[] allwords = query.split("\\s+");
         // Creates a list with NO duplicates of every word in the phrase
         TreeSet<String> nonDuplicateWords = new TreeSet<>(Arrays.asList(query.split("\\s+")));
+        Hashtable<String, Integer> wordQuantities = new Hashtable<>();
+
+        for (String word : allwords) {
+            if (wordQuantities.contains(word)) {
+                wordQuantities.put(word, wordQuantities.get(word) + 1);
+            } else {
+                wordQuantities.put(word, 1);
+            }
+        }
+
 
         Hashtable<String, Integer> linkLocations = (Hashtable<String, Integer>)
-                deserialize(parsedPathString, "link_locations.txt");
+                deserialize(PARSEDPATHSTRING, "link_locations.txt");
 
         if (linkLocations == null) {
             return null;
         }
 
         for (String link : linkLocations.keySet()) {
-            String[] fileText = readFile(crawlPathString + linkLocations.get(link),
+            String[] fileText = readFile(CRAWLPATHSTRING + linkLocations.get(link),
                     "/title_and_link.txt").split("\\R");
-
-            // This will only ever happen if there has been no crawl
-            if (fileText == null) {
-                return null;
-            }
 
             String fileTitle = fileText[0];
             String fileLink = fileText[1];
@@ -38,21 +46,21 @@ public class Search extends FileControl {
             double numerator = 0;
             double denominatorQ = 0;
             double denominatorD = 0;
+
+
             for (String nonDuplicateWord : nonDuplicateWords) {
+
                 // Get the amount of times the word appears in the query
-                double wordQuantity = 0;
-                for (String word : allwords) {
-                    if (nonDuplicateWord.equals(word)) {
-                        wordQuantity++;
-                    }
-                }
+                double wordQuantity = wordQuantities.get(nonDuplicateWord);
                 double tfQ = wordQuantity / allwords.length;
                 double qValue = log(1 + tfQ) / log(2) * searchDataClass.getIDF(nonDuplicateWord);
                 double dValue = searchDataClass.getTFIDF(fileLink, nonDuplicateWord);
                 numerator += qValue * dValue;
                 denominatorQ += qValue * qValue;
                 denominatorD += dValue * dValue;
+
             }
+
             if (denominatorD != 0) {
                 if (boost) {
                     cosineSimilarity = searchDataClass.getPageRank(fileLink) * numerator
@@ -61,6 +69,7 @@ public class Search extends FileControl {
                     cosineSimilarity = numerator / (Math.sqrt(denominatorQ) * (Math.sqrt(denominatorD)));
                 }
             }
+
 
             // Place the new file's cosine similarity into the list in the correct spot
             int placementLocation = 0;
@@ -82,6 +91,7 @@ public class Search extends FileControl {
             if (topX.size() > X) {
                 topX.remove(X);
             }
+
         }
         return topX;
     }

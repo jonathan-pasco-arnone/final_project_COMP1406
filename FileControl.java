@@ -2,8 +2,8 @@ import java.io.*;
 import java.util.Hashtable;
 
 public class FileControl {
-    public String parsedPathString = "parsedData/";
-    public String crawlPathString = "crawlData/";
+    public static final String PARSEDPATHSTRING = "parsedData/";
+    public static final String CRAWLPATHSTRING = "crawlData/";
     public boolean serialize(String path, String filename, Object object) {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(path + filename);

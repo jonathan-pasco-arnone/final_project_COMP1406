@@ -33,7 +33,8 @@ public class PageView extends Pane {
     public Label getTopLinksLabel() { return topLinksLabel; }
     public Rectangle getScreenDivider() { return screenDivider; }
     public void updateTable(List<SearchResult> topResults) {
-        topLinksLabel = new Label("Top " + searchQuantity.getValue() + " links:");
+        topLinksLabel.setText("Top " + searchQuantity.getValue() + " links:");
+        topLinks.getItems().clear();
         topLinks.getItems().addAll(topResults);
     }
     public void updateOrganization(double newWidth) {
@@ -88,7 +89,7 @@ public class PageView extends Pane {
         // Drop down to select the amount of searches to provide
         searchQuantity.relocate(10, 170);
         int counter = 1;
-        int maxSelection = 20;
+        int maxSelection = 20; // Could be anything but has to be bigger than 10
         while (counter <= maxSelection) {
             searchQuantity.getItems().add(counter);
             counter++;

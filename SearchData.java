@@ -1,21 +1,24 @@
-import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.List;
 
 import static java.lang.Math.log;
+import static java.lang.System.currentTimeMillis;
 
 public class SearchData extends FileControl {
+    private final Hashtable<String, Integer> linkLocations;
+    private final Hashtable<String, Integer> idfs;
+    public SearchData() {
+        linkLocations = (Hashtable<String, Integer>) deserialize(PARSEDPATHSTRING, "link_locations.txt");
+        idfs = (Hashtable<String, Integer>) deserialize(PARSEDPATHSTRING, "idf.txt");
+    }
     public List<String> getOutgoingLinks(String url) {
-        Hashtable<String, Integer> linkLocations = (Hashtable<String, Integer>)
-                deserialize(parsedPathString, "link_locations.txt");
-
         if (linkLocations == null) {
             return null;
         }
 
-        String outgingString = readFile(crawlPathString + linkLocations.get(url),
+        String outgingString = readFile(CRAWLPATHSTRING + linkLocations.get(url),
                 "/outgoing_links.txt");
 
         if (outgingString == null) {
@@ -26,14 +29,12 @@ public class SearchData extends FileControl {
     }
 
     public List<String> getIncomingLinks(String url) {
-        Hashtable<String, Integer> linkLocations = (Hashtable<String, Integer>)
-                deserialize(parsedPathString, "link_locations.txt");
-
+        System.out.println(linkLocations);
         if (linkLocations == null) {
             return null;
         }
 
-        String incomingString = readFile(crawlPathString + linkLocations.get(url),
+        String incomingString = readFile(CRAWLPATHSTRING + linkLocations.get(url),
                 "/incoming_links.txt");
 
         if (incomingString == null) {
@@ -44,10 +45,7 @@ public class SearchData extends FileControl {
     }
 
     public double getPageRank(String url) {
-        Hashtable<String, Integer> linkLocations = (Hashtable<String, Integer>)
-                deserialize(parsedPathString, "link_locations.txt");
-
-        double[] pageRanks = (double[]) deserialize(parsedPathString, "page_ranks.txt");
+        double[] pageRanks = (double[]) deserialize(PARSEDPATHSTRING, "page_ranks.txt");
 
         if (linkLocations == null || pageRanks == null || linkLocations.get(url) == null) {
             return -1;
@@ -58,10 +56,6 @@ public class SearchData extends FileControl {
     }
 
     public double getIDF(String word) {
-        Hashtable<String, Integer> linkLocations = (Hashtable<String, Integer>)
-                deserialize(parsedPathString, "link_locations.txt");
-        Hashtable<String, Integer> idfs = (Hashtable<String, Integer>)
-                deserialize(parsedPathString, "idf.txt");
         if (linkLocations == null || idfs == null || idfs.get(word) == null) {
             return 0;
         }
@@ -71,14 +65,11 @@ public class SearchData extends FileControl {
     public double getTF(String url, String word) {
         double timeWordAppears = 0;
 
-        Hashtable<String, Integer> linkLocations = (Hashtable<String, Integer>)
-                deserialize(parsedPathString, "link_locations.txt");
-
         if (linkLocations == null || linkLocations.get(url) == null) {
             return 0;
         }
 
-        String fileText = readFile(crawlPathString + linkLocations.get(url), "/page_text.txt");
+        String fileText = readFile(CRAWLPATHSTRING + linkLocations.get(url), "/page_text.txt");
         String[] wordList = fileText.split("\\R");
         for (String singleWord : wordList) {
             if (singleWord.equals(word)) {

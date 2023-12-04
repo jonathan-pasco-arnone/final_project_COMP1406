@@ -9,4 +9,8 @@ public class SingleSearchResult implements SearchResult {
         title = initialTitle;
         score = initialScore;
     }
+
+    public String toString() {
+        return getTitle() + " | " + getScore();
+    }
 }

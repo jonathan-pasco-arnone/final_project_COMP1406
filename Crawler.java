@@ -6,8 +6,8 @@ import java.util.*;
 public class Crawler extends FileControl implements Serializable {
     public void initialize() {
         // Deletes all the folders and files
-        if (Files.exists(Paths.get(crawlPathString))) {
-            File[] directories = new File(crawlPathString).listFiles(File::isDirectory);
+        if (Files.exists(Paths.get(CRAWLPATHSTRING))) {
+            File[] directories = new File(CRAWLPATHSTRING).listFiles(File::isDirectory);
             for (File folder : directories) {
                 File[] allFiles = new File(folder.getPath()).listFiles();
                 for (File individualFile : allFiles) {
@@ -16,8 +16,8 @@ public class Crawler extends FileControl implements Serializable {
                 folder.delete();
             }
         }
-        if (Files.exists(Paths.get(parsedPathString))) {
-            File[] files = new File(parsedPathString).listFiles();
+        if (Files.exists(Paths.get(PARSEDPATHSTRING))) {
+            File[] files = new File(PARSEDPATHSTRING).listFiles();
             for (File sinlgeFile : files) {
                 sinlgeFile.delete();
             }
@@ -26,10 +26,10 @@ public class Crawler extends FileControl implements Serializable {
 
     public void crawl(String seedURL) {
         try {
-            new File(crawlPathString).mkdirs();
+            new File(CRAWLPATHSTRING).mkdirs();
             // Do some crawling
-            Hashtable<String, Integer> linkLocations = new Hashtable<>();
-            linkLocations.put(seedURL, 0);
+            Hashtable<String, Integer> locationsOfLinks = new Hashtable<>();
+            locationsOfLinks.put(seedURL, 0);
 
             ArrayList<String> links = new ArrayList<>();
             links.add(seedURL);
@@ -38,7 +38,7 @@ public class Crawler extends FileControl implements Serializable {
 
             int folderNum = 0;
             while (folderNum < links.size()) {
-                new File(crawlPathString + folderNum).mkdirs();
+                new File(CRAWLPATHSTRING + folderNum).mkdirs();
                 String weblink = links.get(folderNum);
                     String docString = WebRequester.readURL(weblink);
                     boolean edit_text = false;
@@ -72,7 +72,7 @@ public class Crawler extends FileControl implements Serializable {
 
                             // Parses the text
                             if ("</p>".equals(docString.substring(index, index + 4))) {
-                                writeFile(new_text.toString(), crawlPathString + String.valueOf(folderNum), "/page_text.txt");
+                                writeFile(new_text.toString(), CRAWLPATHSTRING + String.valueOf(folderNum), "/page_text.txt");
                                 // Adds the amount of times the word appears in the doc
                                 // The "\\R" splits the string into an array of strings separated by new lines
                                 for (String word : new TreeSet<>(Arrays.asList(docString.split("\\R")))) {
@@ -103,11 +103,11 @@ public class Crawler extends FileControl implements Serializable {
 
                                 // If the link has not already been crawled
                                 if (!links.contains(new_text.toString())) {
-                                    linkLocations.put(new_text.toString(), links.size());
+                                    locationsOfLinks.put(new_text.toString(), links.size());
                                     links.add(new_text.toString());
                                 }
 
-                                writeFile(new_text.toString(), crawlPathString + String.valueOf(folderNum), "/outgoing_links.txt");
+                                writeFile(new_text.toString(), CRAWLPATHSTRING + String.valueOf(folderNum), "/outgoing_links.txt");
                                 edit_text = false;
                                 new_text = new StringBuilder();
 
@@ -115,7 +115,7 @@ public class Crawler extends FileControl implements Serializable {
                             } else if ("</title>".equals(docString.substring(index, index + 8))) {
                                 // Adds the title and link of the website to a file
                                 new_text.append("\n").append(weblink);
-                                writeFile(new_text.toString(), crawlPathString + String.valueOf(folderNum), "/title_and_link.txt");
+                                writeFile(new_text.toString(), CRAWLPATHSTRING + String.valueOf(folderNum), "/title_and_link.txt");
                                 edit_text = false;
                                 new_text = new StringBuilder();
 
@@ -129,24 +129,24 @@ public class Crawler extends FileControl implements Serializable {
                 folderNum++;
             }
 
-            File[] directories = new File(crawlPathString).listFiles(File::isDirectory);
+            File[] directories = new File(CRAWLPATHSTRING).listFiles(File::isDirectory);
             for (File folder : directories) {
                 // Grabs the current folder's link
-                String currentLink = readFile(crawlPathString + folder.getName(), "/title_and_link.txt").split("\\R")[1];
+                String currentLink = readFile(CRAWLPATHSTRING + folder.getName(), "/title_and_link.txt").split("\\R")[1];
 
                 // For each of the outgoing links
-                for (String outgoingLink : readFile(crawlPathString + folder.getName(),
+                for (String outgoingLink : readFile(CRAWLPATHSTRING + folder.getName(),
                         "/outgoing_links.txt").split("\\R")) {
                     // Add link to the current incoming links file
-                    writeFile(currentLink, crawlPathString + linkLocations.get(outgoingLink).toString(), "/incoming_links.txt");
+                    writeFile(currentLink, CRAWLPATHSTRING + locationsOfLinks.get(outgoingLink).toString(), "/incoming_links.txt");
                 }
             }
 
-            new File(parsedPathString).mkdir();
+            new File(CRAWLPATHSTRING).mkdir();
 
             // Serializing
-            serialize(parsedPathString, "link_locations.txt", linkLocations);
-            serialize(parsedPathString, "idf.txt", wordPerDoc);
+            serialize(PARSEDPATHSTRING, "link_locations.txt", locationsOfLinks);
+            serialize(PARSEDPATHSTRING, "idf.txt", wordPerDoc);
 
             /*
             *
@@ -155,29 +155,28 @@ public class Crawler extends FileControl implements Serializable {
             * */
 
             // The main matrix of the problem
-            double[][] probabilityMatrix = new double[linkLocations.size()][linkLocations.size()];
-            double[] basicVector = new double[linkLocations.size()];
+            double[][] probabilityMatrix = new double[locationsOfLinks.size()][locationsOfLinks.size()];
+            double[] basicVector = new double[locationsOfLinks.size()];
             double alpha = 0.1;
 
             basicVector[0] = 1;
 
             // Fill out the probability matrix
-            for (String link : linkLocations.keySet()) {
-                SearchData searchDataInstance = new SearchData();
-                List<String> incomingLinks =  searchDataInstance.getIncomingLinks(link);
-                double chancePerPage = (double) 1 / incomingLinks.size();
+            for (String link : locationsOfLinks.keySet()) {
+                String[] incomingLinks = readFile(CRAWLPATHSTRING + locationsOfLinks.get(link), "/incoming_links.txt").split("\\R");
+                double chancePerPage = (double) 1 / incomingLinks.length;
 
                 // Add the default value
                 int count = 0;
-                while (count != probabilityMatrix[linkLocations.get(link)].length) {
-                    probabilityMatrix[linkLocations.get(link)][count] = alpha / linkLocations.size();
+                while (count != probabilityMatrix[locationsOfLinks.get(link)].length) {
+                    probabilityMatrix[locationsOfLinks.get(link)][count] = alpha / locationsOfLinks.size();
                     count++;
                 }
 
                 // Add the probability of each incoming page
                 for (String singleIncomingLink : incomingLinks) {
-                    probabilityMatrix[linkLocations.get(link)][linkLocations.get(singleIncomingLink)] = chancePerPage
-                            * (1 - alpha) + alpha / linkLocations.size();
+                    probabilityMatrix[locationsOfLinks.get(link)][locationsOfLinks.get(singleIncomingLink)] = chancePerPage
+                            * (1 - alpha) + alpha / locationsOfLinks.size();
                 }
             }
 
@@ -193,7 +192,7 @@ public class Crawler extends FileControl implements Serializable {
                 vectorB = basicVector;
 
                 // Multiply the matrix by the vector
-                double[] newVector = new double[linkLocations.size()];
+                double[] newVector = new double[locationsOfLinks.size()];
                 int columnIndexProbabilityMatrix = 0;
                 // Cycles through each column of the probability matrix
                 while (columnIndexProbabilityMatrix != probabilityMatrix[0].length) {
@@ -220,7 +219,7 @@ public class Crawler extends FileControl implements Serializable {
                 euclideanDistance = Math.sqrt(euclideanDistance);
             }
 
-            serialize(parsedPathString, "page_ranks.txt", basicVector);
+            serialize(PARSEDPATHSTRING, "page_ranks.txt", basicVector);
 
         } catch (IOException e) {
             // IOException will happen if the link is invalid
