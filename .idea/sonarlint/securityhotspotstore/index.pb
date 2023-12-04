@@ -127,3 +127,8 @@ I
 crawlData/7/page_text.txt,7\b\7bea407e8987a9a3dc13349465952bf10b0f87ae
 I
 parsedData/page_ranks.txt,a\c\ace8b14c45c948dc97e0cd5ed1d1721d8229947a
+:
+
+Model.java,8\9\89d461e08382ef3c89701843e1332d5e8a184f2e
+;
+Search.java,f\7\f7bd3241f7481e4d321e3f8b0db04c74d7955122

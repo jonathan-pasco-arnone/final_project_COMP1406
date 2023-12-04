@@ -12,49 +12,10 @@ import java.util.List;
 
 
 public class Controller extends Application {
-    // Instantiate classes
-    public Crawler crawlClass = new Crawler();
-    public SearchData searchDataClass = new SearchData();
-    public SearchPrompt searchClass = new SearchPrompt();
-
-   public void initialize() {
-        crawlClass.initialize();
-    }
-
-    public void crawl(String seedURL) {
-        crawlClass.crawl(seedURL);
-    }
-
-    public List<String> getOutgoingLinks(String url) {
-        return searchDataClass.getOutgoingLinks(url);
-    }
-
-    public List<String> getIncomingLinks(String url) {
-        return searchDataClass.getIncomingLinks(url);
-
-    }
-
-    public double getPageRank(String url) {
-        return searchDataClass.getPageRank(url);
-    }
-
-    public double getIDF(String word) {
-        return searchDataClass.getIDF(word);
-    }
-
-    public double getTF(String url, String word) {
-        return searchDataClass.getTF(url, word);
-    }
-
-    public double getTFIDF(String url, String word) {
-        return searchDataClass.getTFIDF(url, word);
-    }
-
-    /*public List<SearchResult> search(String query, boolean boost, int X) {
-        return searchClass.search(query, boost, X);
-    }*/
 
     public void start(Stage primaryStage) {
+        Model model = new Model();
+
         PageView view = new PageView();
 
         Pane aPane = new Pane();
@@ -83,15 +44,15 @@ public class Controller extends Application {
          */
         view.getCrawlButton().setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent actionEvent) {
-                initialize();
-                crawl(view.getCrawlTextField().getText());
+                model.initialize();
+                model.crawl(view.getCrawlTextField().getText());
                 view.getCrawlTextField().clear();
             }
         });
 
         view.getSearchWordButton().setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent actionEvent) {
-//                search(searchWordTextField.getText(), pageRankButton.isSelected(), (int) searchQuantity.getValue());
+//                model.search(searchWordTextField.getText(), pageRankButton.isSelected(), (int) searchQuantity.getValue());
                 view.getSearchWordTextField().clear();
             }
         });
@@ -106,7 +67,7 @@ public class Controller extends Application {
         // Adding everything to the pane
         aPane.getChildren().addAll(view);
 
-        System.out.println(getIDF("fig"));
+        System.out.println(model.getTF("http://people.scs.carleton.ca/~davidmckenney/tinyfruits/N-7.html", "fig"));
 
     }
 

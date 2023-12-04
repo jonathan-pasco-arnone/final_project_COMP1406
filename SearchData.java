@@ -69,6 +69,7 @@ public class SearchData extends FileControl {
         }
 
         String fileText = readFile(crawlPathString + linkLocations.get(url), "/page_text.txt");
+        // The reason for the substring is to eliminate the first new line
         String[] wordList = fileText.split("\\R");
         for (String singleWord : wordList) {
             if (singleWord.equals(word)) {

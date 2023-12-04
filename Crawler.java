@@ -1,10 +1,7 @@
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.List;
+import java.util.*;
 
 public class Crawler extends FileControl implements Serializable {
     public void initialize() {
@@ -43,7 +40,6 @@ public class Crawler extends FileControl implements Serializable {
             while (folderNum < links.size()) {
                 new File(crawlPathString + folderNum).mkdirs();
                 String weblink = links.get(folderNum);
-                boolean linkExists = false;
                     String docString = WebRequester.readURL(weblink);
                     boolean edit_text = false;
 
@@ -67,7 +63,9 @@ public class Crawler extends FileControl implements Serializable {
                                 }
                                 if ("<p>".equals(docString.substring(index, index + 3))) {
                                     edit_text = true;
-                                    index += 2;
+                                    // Would be +2 but since the <p> tag always has a new line after it, an additional
+                                    // +1 is added
+                                    index += 3;
                                 }
                             } else {
                                 break;
@@ -79,8 +77,9 @@ public class Crawler extends FileControl implements Serializable {
                                 writeFile(new_text.toString(), crawlPathString + String.valueOf(folderNum), "/page_text.txt");
                                 // Adds the amount of times the word appears in the doc
                                 // The "\\R" splits the string into an array of strings separated by new lines
-                                for (String word : docString.split("\\R")) {
-                                    if (wordPerDoc.get(word) == null) {
+                                // Using a tree set ensures no duplicates
+                                for (String word : new TreeSet<>(Arrays.asList(docString.split("\\R")))) {
+                                    if (!wordPerDoc.containsKey(word)) {
                                         wordPerDoc.put(word, 1);
                                     } else {
                                         wordPerDoc.put(word, wordPerDoc.get(word) + 1);
