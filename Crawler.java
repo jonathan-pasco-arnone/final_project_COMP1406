@@ -2,6 +2,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -184,7 +185,13 @@ public class Crawler extends FileControl implements Serializable {
                 }
             }
 
-            double[] vectorB = new double[linkLocations.size()];
+            /*
+            *
+            * Remove vector b and initialize it inside the while loop
+            *
+            *
+            * */
+            double[] vectorB;
             double euclideanDistance = 1;
             while (euclideanDistance > 0.0001) {
                 vectorB = basicVector;
@@ -217,7 +224,7 @@ public class Crawler extends FileControl implements Serializable {
                 euclideanDistance = Math.sqrt(euclideanDistance);
             }
 
-//            serialize(parsedPathString, "")
+            serialize(parsedPathString, "page_ranks.txt", basicVector);
 
         } catch (IOException e) {
             // IOException will happen if the link is invalid

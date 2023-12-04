@@ -1,17 +1,8 @@
 
-blueberry
-orange
-orange
-apricot
-fig
-banana
-peach
-apricot
-lime
-orange
-blueberry
 coconut
+apple
 orange
-banana
-kiwi
-pear
+cherry
+orange
+papaya
+coconut

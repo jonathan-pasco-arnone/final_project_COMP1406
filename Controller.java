@@ -8,6 +8,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.event.*;
 
+import java.util.List;
+
 
 public class Controller extends Application {
     // Instantiate classes
@@ -23,34 +25,34 @@ public class Controller extends Application {
         crawlClass.crawl(seedURL);
     }
 
-    /*public List<String> getOutgoingLinks(String url) {
-        searchDataClass.getOutgoingLinks(url);
+    public List<String> getOutgoingLinks(String url) {
+        return searchDataClass.getOutgoingLinks(url);
     }
 
     public List<String> getIncomingLinks(String url) {
-        searchDataClass.getIncomingLinks(url);
+        return searchDataClass.getIncomingLinks(url);
 
     }
 
     public double getPageRank(String url) {
-        searchDataClass.getPageRank(url);
+        return searchDataClass.getPageRank(url);
     }
 
     public double getIDF(String word) {
-        searchDataClass.getIDF(word);
+        return searchDataClass.getIDF(word);
     }
 
     public double getTF(String url, String word) {
-        searchDataClass.getTF(url, word);
+        return searchDataClass.getTF(url, word);
     }
 
     public double getTFIDF(String url, String word) {
-        searchDataClass.getTFIDF(url, word);
+        return searchDataClass.getTFIDF(url, word);
     }
 
-    public List<SearchResult> search(String query, boolean boost, int X) {
-        searchClass.search(query, boost, X);
-    } */
+    /*public List<SearchResult> search(String query, boolean boost, int X) {
+        return searchClass.search(query, boost, X);
+    }*/
 
     public void start(Stage primaryStage) {
         PageView view = new PageView();
@@ -103,6 +105,8 @@ public class Controller extends Application {
 
         // Adding everything to the pane
         aPane.getChildren().addAll(view);
+
+        System.out.println(getIDF("fig"));
 
     }
 

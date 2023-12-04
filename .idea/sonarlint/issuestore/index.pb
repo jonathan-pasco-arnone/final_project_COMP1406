@@ -125,3 +125,5 @@ N
 crawlData/7/outgoing_links.txt,f\d\fd61898a3e70eee7d4429e98f014f3b55c3a6d28
 I
 crawlData/7/page_text.txt,7\b\7bea407e8987a9a3dc13349465952bf10b0f87ae
+I
+parsedData/page_ranks.txt,a\c\ace8b14c45c948dc97e0cd5ed1d1721d8229947a

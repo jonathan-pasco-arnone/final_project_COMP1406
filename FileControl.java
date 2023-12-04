@@ -15,11 +15,9 @@ public class FileControl {
             return false;
         }
     }
-    public Hashtable<String, Integer> parseHashTable(String path, String filename) {
-        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(path
-                + filename))) {
-
-            return (Hashtable<String, Integer>) inputStream.readObject();
+    public Object deserialize(String path, String filename) {
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(path + filename))) {
+            return inputStream.readObject();
         } catch (IOException | ClassNotFoundException e) {
             return null;
         }

@@ -1,5 +1,12 @@
 
+apple
 banana
+papaya
 apricot
-kiwi
-blueberry
+orange
+coconut
+cherry
+papaya
+apple
+apricot
+banana

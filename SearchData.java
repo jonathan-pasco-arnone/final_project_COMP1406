@@ -8,7 +8,8 @@ import static java.lang.Math.log;
 
 public class SearchData extends FileControl {
     public List<String> getOutgoingLinks(String url) {
-        Hashtable<String, Integer> linkLocations = parseHashTable(parsedPathString, "link_locations.txt");
+        Hashtable<String, Integer> linkLocations = (Hashtable<String, Integer>)
+                deserialize(parsedPathString, "link_locations.txt");
 
         if (linkLocations == null) {
             return null;
@@ -20,9 +21,10 @@ public class SearchData extends FileControl {
     }
 
     public List<String> getIncomingLinks(String url) {
-        Hashtable<String, Integer> linkLocations = parseHashTable(parsedPathString, "link_locations.txt");
+        Hashtable<String, Integer> linkLocations = (Hashtable<String, Integer>)
+                deserialize(parsedPathString, "link_locations.txt");
 
-        if (linkLocations.equals(null)) {
+        if (linkLocations == null) {
             return null;
         }
 
@@ -31,22 +33,36 @@ public class SearchData extends FileControl {
         return new ArrayList<>(Arrays.asList(incomingString.split("\\R")));
     }
 
-    /*public double getPageRank(String url) {
+    public double getPageRank(String url) {
+        Hashtable<String, Integer> linkLocations = (Hashtable<String, Integer>)
+                deserialize(parsedPathString, "link_locations.txt");
 
-    }*/
+        double[] pageRanks = (double[]) deserialize(parsedPathString, "page_ranks.txt");
 
-    public double getIDF(String word) {
-        Hashtable<String, Integer> idfs = parseHashTable(parsedPathString, "idf.txt");
-        if (idfs == null) {
+        if (linkLocations == null || pageRanks == null) {
             return 0;
         }
-        return idfs.get(word);
+
+        return pageRanks[linkLocations.get(url)];
+
+    }
+
+    public double getIDF(String word) {
+        Hashtable<String, Integer> linkLocations = (Hashtable<String, Integer>)
+                deserialize(parsedPathString, "link_locations.txt");
+        Hashtable<String, Integer> idfs = (Hashtable<String, Integer>)
+                deserialize(parsedPathString, "idf.txt");
+        if (linkLocations == null || idfs == null) {
+            return 0;
+        }
+        return log((double) linkLocations.size() / (1 + idfs.get(word))) / log(2);
     }
 
     public double getTF(String url, String word) {
         double timeWordAppears = 0;
 
-        Hashtable<String, Integer> linkLocations = parseHashTable(parsedPathString, "link_locations.txt");
+        Hashtable<String, Integer> linkLocations = (Hashtable<String, Integer>)
+                deserialize(parsedPathString, "link_locations.txt");
 
         if (linkLocations == null) {
             return 0;
