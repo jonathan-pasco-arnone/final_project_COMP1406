@@ -66,9 +66,6 @@ public class Controller extends Application {
 
         // Adding everything to the pane
         aPane.getChildren().addAll(view);
-
-        System.out.println(model.getTF("http://people.scs.carleton.ca/~davidmckenney/tinyfruits/N-7.html", "fig"));
-
     }
 
     public static void main(String[] args) {

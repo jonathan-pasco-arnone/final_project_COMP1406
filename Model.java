@@ -1,6 +1,6 @@
 import java.util.List;
 
-public class Model {
+public class Model implements ProjectTester {
 
     // Instantiate classes
     public Crawler crawlClass;
@@ -46,8 +46,8 @@ public class Model {
         return searchDataClass.getTFIDF(url, word);
     }
 
-    /*public List<SearchResult> search(String query, boolean boost, int X) {
-        return searchClass.search(query, boost, X);
-    }*/
+    public List<SearchResult> search(String query, boolean boost, int X) {
+        return null;// searchClass.search(query, boost, X);
+    }
 
 }
