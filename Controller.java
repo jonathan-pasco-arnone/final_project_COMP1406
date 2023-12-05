@@ -38,7 +38,8 @@ public class Controller extends Application {
         *
         * Events
         *
-         */
+        * */
+        // Crawl button
         view.getCrawlButton().setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent actionEvent) {
                 model.initialize();
@@ -47,6 +48,7 @@ public class Controller extends Application {
             }
         });
 
+        // Search button
         view.getSearchWordButton().setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent actionEvent) {
                 // Calls the search action and updates the table together in one line
@@ -56,6 +58,7 @@ public class Controller extends Application {
             }
         });
 
+        // Width property detector
         // Checks if the width of the screen has changed then updates the necessary objects
         aPane.widthProperty().addListener(new ChangeListener<Number>() {
             public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
@@ -65,6 +68,8 @@ public class Controller extends Application {
 
         // Adding everything to the pane
         aPane.getChildren().addAll(view);
+
+//        System.out.println(model.search("coconut fig cherry peach peach", true, 10));
     }
 
     public static void main(String[] args) {

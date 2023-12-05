@@ -1,4 +1,3 @@
-https://people.scs.carleton.ca/~davidmckenney/fruits/N-220.html
-https://people.scs.carleton.ca/~davidmckenney/fruits/N-545.html
-https://people.scs.carleton.ca/~davidmckenney/fruits/N-0.html
-https://people.scs.carleton.ca/~davidmckenney/fruits/N-900.html
+https://people.scs.carleton.ca/~davidmckenney/tinyfruits/N-0.html
+https://people.scs.carleton.ca/~davidmckenney/tinyfruits/N-4.html
+https://people.scs.carleton.ca/~davidmckenney/tinyfruits/N-8.html

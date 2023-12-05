@@ -142,7 +142,7 @@ public class Crawler extends FileControl implements Serializable {
                 }
             }
 
-            new File(CRAWLPATHSTRING).mkdir();
+            new File(PARSEDPATHSTRING).mkdir();
 
             // Serializing
             serialize(PARSEDPATHSTRING, "link_locations.txt", locationsOfLinks);
@@ -180,16 +180,10 @@ public class Crawler extends FileControl implements Serializable {
                 }
             }
 
-            /*
-            *
-            * Remove vector b and initialize it inside the while loop
-            *
-            *
-            * */
-            double[] vectorB;
+            // Remove vector b and initialize it inside the while loop
             double euclideanDistance = 1;
-            while (euclideanDistance > 0.0001) {
-                vectorB = basicVector;
+            while (euclideanDistance > 0.00001) {
+                double[] vectorB = basicVector;
 
                 // Multiply the matrix by the vector
                 double[] newVector = new double[locationsOfLinks.size()];

@@ -1,0 +1,55 @@
+Passed Test #23 checking page rank for https://people.scs.carleton.ca/~davidmckenney/tinyfruits/N-6.html
+expected = 0.04626765223510332
+result = 0.04626970696284635
+
+
+Passed Test #24 checking page rank for https://people.scs.carleton.ca/~davidmckenney/tinyfruits/N-7.html
+expected = 0.1193929620567529
+result = 0.11939273899964016
+
+
+Passed Test #25 checking page rank for https://people.scs.carleton.ca/~davidmckenney/tinyfruits/N-2.html
+expected = 0.04626765223510332
+result = 0.04626970696284635
+
+
+Passed Test #26 checking page rank for https://people.scs.carleton.ca/~davidmckenney/tinyfruits/N-4.html
+expected = 0.11896803724120768
+result = 0.11896921228428044
+
+
+Passed Test #27 checking page rank for https://people.scs.carleton.ca/~davidmckenney/tinyfruits/N-5.html
+expected = 0.04626765223510332
+result = 0.04626970696284635
+
+
+Passed Test #28 checking page rank for https://people.scs.carleton.ca/~davidmckenney/tinyfruits/N-3.html
+expected = 0.08195866555128291
+result = 0.08196023700793112
+
+
+Passed Test #29 checking page rank for https://people.scs.carleton.ca/~davidmckenney/tinyfruits/N-0.html
+expected = 0.32240189578896944
+result = 0.32238858689921424
+
+
+Passed Test #30 checking page rank for https://people.scs.carleton.ca/~davidmckenney/tinyfruits/N-1.html
+expected = 0.04626765223510332
+result = 0.04626970696284635
+
+
+Passed Test #31 checking page rank for https://people.scs.carleton.ca/~davidmckenney/tinyfruits/N-9.html
+expected = 0.04743429650546998
+result = 0.047432501991709036
+
+
+Passed Test #32 checking page rank for https://people.scs.carleton.ca/~davidmckenney/tinyfruits/N-8.html
+expected = 0.12477353391590358
+result = 0.1247778949658393
+
+
+Passed Test #33 checking page rank for http://people.scs.carleton.ca/~davidmckenney/tinyfruits/N.html
+expected = -1.0
+result = -1.0
+
+

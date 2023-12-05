@@ -9,10 +9,13 @@ import static java.lang.System.currentTimeMillis;
 public class SearchData extends FileControl {
     private final Hashtable<String, Integer> linkLocations;
     private final Hashtable<String, Integer> idfs;
-    public SearchData() {
-        linkLocations = (Hashtable<String, Integer>) deserialize(PARSEDPATHSTRING, "link_locations.txt");
+
+    // This constructor will be called after a crawl is called
+    public SearchData(Hashtable<String, Integer> locationOfLinks) {
+        linkLocations = locationOfLinks;
         idfs = (Hashtable<String, Integer>) deserialize(PARSEDPATHSTRING, "idf.txt");
     }
+
     public List<String> getOutgoingLinks(String url) {
         if (linkLocations == null) {
             return null;
@@ -29,7 +32,6 @@ public class SearchData extends FileControl {
     }
 
     public List<String> getIncomingLinks(String url) {
-        System.out.println(linkLocations);
         if (linkLocations == null) {
             return null;
         }

@@ -9,8 +9,6 @@ B
 controller.java,0\b\0b801dc5d796f161e8f3d1f8c75076612d028613
 ?
 searchData.java,6\2\62fc283bb5c3c935e048a68c398c44d9638ad183
-A
-searchPrompt.java,7\e\7e756b18100f04d98f33149a83d53b4e5753a352
 ]
 -.idea/sonarlint/securityhotspotstore/index.pb,8\8\88a9255124c95bdc913197c120a8d560edc59c8e
 w
@@ -45,8 +43,6 @@ I
 PageView.java,2\d\2dd653fd9fdeedbc5f567a2866275ee6a8b672e0
 ?
 SearchData.java,9\1\9138644f0eba182b0db00a9cc0df2e6e9c6a00af
-A
-SearchPrompt.java,7\6\76d67892daaf25f8fa9804e8c8af103ab3fa02b2
 N
 crawlData/1/title_and_link.txt,b\b\bb3aee074a821a6cbcdc6ea1860e2431df8a464b
 N
@@ -69,10 +65,6 @@ N
 crawlData/3/incoming_links.txt,7\0\70b950d5fcc5a485370a63724c2547ac9cc61da1
 N
 crawlData/4/incoming_links.txt,6\8\687e7f7c1ccc63d2a37d141f45d698d2aa7b1f20
-M
-parsedData/link_locations.txt,a\1\a1ec006d2053da033d7a24aa7d64bcf48488d396
-B
-parsedData/idf.txt,3\8\3843678ce3d741d5d34570e029da8a2f317ef4b7
 N
 crawlData/3/title_and_link.txt,0\c\0cd13b498201d6a8ff6719843720423d5ff317a1
 I
@@ -125,47 +117,13 @@ N
 crawlData/7/outgoing_links.txt,f\d\fd61898a3e70eee7d4429e98f014f3b55c3a6d28
 I
 crawlData/7/page_text.txt,7\b\7bea407e8987a9a3dc13349465952bf10b0f87ae
-I
-parsedData/page_ranks.txt,a\c\ace8b14c45c948dc97e0cd5ed1d1721d8229947a
 :
 
 Model.java,8\9\89d461e08382ef3c89701843e1332d5e8a184f2e
 ;
 Search.java,f\7\f7bd3241f7481e4d321e3f8b0db04c74d7955122
-[
-+test-resources/src/Fruits2SearchTester.java,a\6\a67b45731f637b3d444e792541cb4ad49fb5d6cb
-X
-(test-resources/src/Fruits1AllTester.java,5\c\5c740def12341257003a441c301a21d3358f9138
-T
-$test-resources/src/TestingTools.java,d\c\dce3f4c6ac793c96a1e3b92e8005764723f2ce4e
-X
-(test-resources/src/Fruits1IDFTester.java,1\e\1e4f06c912833adc88afea8b1e8a5e3d9d5994e9
-Z
-*test-resources/src/FruitsTinyTFTester.java,3\6\36a83318f4d4ceb807dfe34134bade21afaebe6f
-b
-2test-resources/src/Fruits1IncomingLinksTester.java,5\1\518102eb6d908090b68b4f5b23be0cf5b96b852a
-b
-2test-resources/src/Fruits1OutgoingLinksTester.java,d\c\dcf9ffde5d9bcc80df8300632ddefce3c06625bf
-^
-.test-resources/src/Fruits1PageRanksTester.java,3\a\3af2d17debd40d47900161afb128657ddb97de1a
 E
 Fruits1AllTester.java,4\4\4449a0ffa8de74c28a47d612ec98d3774a7fbc79
-L
-src/Fruits2SearchTester.java,d\d\dda1d46d3bf8906a75ca74012698412d102b72d0
-K
-src/FruitsTinyTFTester.java,c\f\cfbc0d15246ef689ab749fb689b78889ef339dde
-I
-src/Fruits1IDFTester.java,6\f\6fb873f569e7a720987ebef9b7ff64baefddf92c
-S
-#src/Fruits1IncomingLinksTester.java,6\d\6d8f35580480d60b3a18f8dd9b7f5457ddb92513
-S
-#src/Fruits1OutgoingLinksTester.java,a\f\af44ece56d47ce6e7d5a5725a9e3fd0cc1fd973c
-O
-src/Fruits1PageRanksTester.java,3\8\38498a1ca0bc56e6bb0747526b3c5f2d8d9d27b9
-E
-src/TestingTools.java,f\4\f450ecf25c5cc4fc351eee83072a2931aa32a2e8
-I
-src/Fruits1AllTester.java,f\6\f656a2d77ee988c29e2fdfaf59534a96d3aa868c
 E
 Fruits1IDFTester.java,6\3\63485193d738dda20e60607ffe3af8a2ffe2f409
 O
@@ -262,28 +220,8 @@ G
 FruitsTinyTFTester.java,e\a\ea06ec2706e93fc181347c8b19d7bb94219fc207
 A
 TestingTools.java,d\c\dca37f4c6f480ad09bc0ae5fcb34b91ca74ec753
-I
-FruitsTiny-IDF-failed.txt,9\8\986691427ad572d10a28ab88be6451f33e3faff4
-I
-FruitsTiny-IDF-passed.txt,f\e\fe329f44f5f69bf984629d27acc520c38b1ec51c
-S
-#FruitsTiny-IncomingLinks-failed.txt,d\9\d99c71185a4fe59921093ee277c461be0c3e2b47
-S
-#FruitsTiny-IncomingLinks-passed.txt,1\e\1e7eff99b56e37262b3abbd8b2650b7c4ee335f1
-S
-#FruitsTiny-OutgoingLinks-failed.txt,e\d\ed72ff7c03c01ed7ab266a0277526afad65b06a6
-O
-FruitsTiny-PageRanks-failed.txt,5\0\5064709d7c7405e3f790cfdb6ca68c342baa6ea9
-L
-FruitsTiny-Search-failed.txt,4\e\4efe2f5903a1e40637a5ef55ec32874c37193ebf
-H
-FruitsTiny-TF-failed.txt,f\9\f9f5599774451ef4876035c99b7a69b7736a31f9
-K
-FruitsTiny-TFIDF-failed.txt,7\2\7216b776bfdb6c16f1d38e1cbff61d37533e4c4c
 G
 SingleSearchResult.java,0\5\05486c0f84cec76df7b6d00dd69caa126188e93d
-L
-FruitsTiny-Search-passed.txt,c\3\c3b004eea569a256bd44f3ff6684098b6ca963fb
 _
 /Fruits1SearchTester-expected-search-results.txt,5\6\56659dd8b80f01748cbbbb65f958f9daed381515
 _
@@ -8244,3 +8182,121 @@ P
  crawlData/946/title_and_link.txt,b\1\b1423fe4ab828625755a11a98b2df1eca5560062
 P
  crawlData/947/incoming_links.txt,6\2\6244c509657441f2034c200df035f26d26e5b080
+A
+SearchEngine.java,0\0\0062c0a8952bcaeb1f66fc81065416271c06385c
+I
+FruitsTiny-IDF-failed.txt,9\8\986691427ad572d10a28ab88be6451f33e3faff4
+S
+#FruitsTiny-IncomingLinks-failed.txt,d\9\d99c71185a4fe59921093ee277c461be0c3e2b47
+S
+#FruitsTiny-OutgoingLinks-failed.txt,e\d\ed72ff7c03c01ed7ab266a0277526afad65b06a6
+O
+FruitsTiny-PageRanks-failed.txt,5\0\5064709d7c7405e3f790cfdb6ca68c342baa6ea9
+L
+FruitsTiny-Search-failed.txt,4\e\4efe2f5903a1e40637a5ef55ec32874c37193ebf
+H
+FruitsTiny-TF-failed.txt,f\9\f9f5599774451ef4876035c99b7a69b7736a31f9
+K
+FruitsTiny-TFIDF-failed.txt,7\2\7216b776bfdb6c16f1d38e1cbff61d37533e4c4c
+L
+FruitsTiny-Search-passed.txt,c\3\c3b004eea569a256bd44f3ff6684098b6ca963fb
+H
+Fruits2-TFIDF-failed.txt,f\8\f81c524824b22b76a45f70e2e966819e3b68a7af
+E
+Fruits2-TF-failed.txt,5\a\5a2b13ea5f73fb105111345468bb8a4f06ec202e
+I
+Fruits2-Search-failed.txt,b\0\b06617701aa0e8513c99adcf030b6a05408f1d70
+L
+Fruits2-PageRanks-failed.txt,a\c\ac93840f43becd10814b9c497df5e15dfe1bf5ca
+P
+ Fruits2-OutgoingLinks-failed.txt,e\e\ee725b9e7cb7f9e2c9ce89849c2c9b7abe74e238
+P
+ Fruits2-IncomingLinks-failed.txt,8\7\874f3f23799f4d4cee59b42d3347d7836110eb1d
+F
+Fruits2-IDF-failed.txt,1\5\1530ca9781bd39889ee6a1b82297d35f8d6c82cf
+H
+Fruits3-TFIDF-failed.txt,a\4\a41b87bedf704b70405e85e6a6c93dc027b9483e
+E
+Fruits3-TF-failed.txt,7\c\7c60e015a4f14e972a04198ad50a701b20af9986
+I
+Fruits3-Search-failed.txt,a\0\a098e24274859a82d7dc49f690aa83b501748d27
+L
+Fruits3-PageRanks-failed.txt,4\4\4445e920bc515e2b0e2c444fe910055f592b07c8
+P
+ Fruits3-OutgoingLinks-failed.txt,a\9\a967953c040b7106f4f941d3ef8f1afcffcbcd55
+P
+ Fruits3-IncomingLinks-failed.txt,d\a\da5584512e5ed4ee53b4552d816ce04d8c6306bc
+F
+Fruits3-IDF-failed.txt,1\9\1921437fd3a35c336ce4515822d7e4fef9dfed4c
+I
+Fruits3-Search-passed.txt,b\b\bb38133e20c19bdd9beae27b14ad9694061d80da
+F
+Fruits4-IDF-failed.txt,2\f\2f6973df10369bfa675f854dc0a48ddbc683c8f8
+P
+ Fruits4-IncomingLinks-failed.txt,e\1\e13956297350e4df6881218de23c0fba7a40b322
+L
+Fruits4-PageRanks-failed.txt,9\6\96a97b6d3320359d23e0d59268e8575384c714e3
+I
+Fruits4-Search-failed.txt,7\3\73673912f91158db5db3575b8f99955d29a9675e
+E
+Fruits4-TF-failed.txt,7\8\7881e08039ecd5e7bb379da54773f3d6cc97fa4d
+H
+Fruits4-TFIDF-failed.txt,1\c\1c4ae3cc4be7ad3c7e030d2d2d712ce6cc13ddd6
+F
+Fruits5-IDF-failed.txt,a\5\a50d08f7f19a053438229a8f8a7f7bacf4055212
+P
+ Fruits5-IncomingLinks-failed.txt,1\6\162bf3daaad23e7f3dd670e7edf90fe0caeef310
+P
+ Fruits5-OutgoingLinks-failed.txt,2\6\2653f1f148aedf400d7d11062b51ad0021f14011
+L
+Fruits5-PageRanks-failed.txt,1\3\13593c285e1faa83b64886a0d9a47845c948015b
+I
+Fruits5-Search-failed.txt,1\c\1c54aa515695777839f805bdc553a6352bb6402f
+E
+Fruits5-TF-failed.txt,7\8\78d1e974dc3c307290956c2f1214bedc2757bda3
+H
+Fruits5-TFIDF-failed.txt,1\a\1a78d3a35884bbb9b53f115107c5ddeb1dd76ae3
+L
+Fruits2-PageRanks-passed.txt,0\e\0ed32cfbb65f95257a482e23e84139c8797f861c
+E
+Fruits2-TF-passed.txt,8\5\856137cbcb1df80d343691d3667c0cd267a63bf1
+I
+Fruits2-Search-passed.txt,0\2\0279b61182069a1c25a14a17ceabecd24e89e445
+P
+ Fruits2-OutgoingLinks-passed.txt,5\d\5db63ca934a01ff27aebe64e95cb30c6fb1e074d
+H
+Fruits2-TFIDF-passed.txt,0\1\01c33c91929e435a37e4a687d695f5380600f615
+P
+ Fruits2-IncomingLinks-passed.txt,9\d\9df3b31ca236332dd24e62f3726831c8e41553bd
+F
+Fruits2-IDF-passed.txt,c\6\c697ca769591053864f408bbf89018bc035621c4
+M
+parsedData/link_locations.txt,a\1\a1ec006d2053da033d7a24aa7d64bcf48488d396
+I
+parsedData/page_ranks.txt,a\c\ace8b14c45c948dc97e0cd5ed1d1721d8229947a
+B
+parsedData/idf.txt,3\8\3843678ce3d741d5d34570e029da8a2f317ef4b7
+L
+Fruits3-PageRanks-passed.txt,3\2\3252fb9e959f6dc4c56a3e9eab58e9049ffe0a5c
+F
+Fruits3-IDF-passed.txt,0\5\05a07fd8fe8d1bba5160b9e84250bfff752cb8f0
+P
+ Fruits3-IncomingLinks-passed.txt,f\e\fe427ec0fd2acc8dfa3b54f0fa9422fa2f94865a
+H
+Fruits3-TFIDF-passed.txt,2\8\28fc43e59c0ef95f0e199de0ea823fe241e4a5df
+E
+Fruits3-TF-passed.txt,c\a\caab840b404e0ecb613976d087969f4b19ba081e
+P
+ Fruits3-OutgoingLinks-passed.txt,f\5\f5e83b6d327f272e3e955013dc044f715f38814c
+K
+FruitsTiny-TFIDF-passed.txt,1\c\1cf1c49a2ff4cbaf907845ca5a82f73f93b03905
+H
+FruitsTiny-TF-passed.txt,8\9\89bda4ebcbb5bcf66707f820b44905acce694100
+O
+FruitsTiny-PageRanks-passed.txt,7\d\7d09606e6687e10a93350b5eadd2b893a7bfdeb6
+S
+#FruitsTiny-OutgoingLinks-passed.txt,c\d\cd2dd2af46967fee403cc489e0c1b0e7d0d6cc31
+I
+FruitsTiny-IDF-passed.txt,f\e\fe329f44f5f69bf984629d27acc520c38b1ec51c
+S
+#FruitsTiny-IncomingLinks-passed.txt,1\e\1e7eff99b56e37262b3abbd8b2650b7c4ee335f1
