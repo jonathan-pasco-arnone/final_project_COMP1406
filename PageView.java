@@ -17,11 +17,12 @@ public class PageView extends Pane {
     private TextField searchWordTextField;
     private Button searchWordButton;
     private RadioButton pageRankButton;
-    private ComboBox searchQuantity;
+    private ComboBox<Integer> searchQuantity;
     private Label searchQuantityRequest;
     private ListView<SearchResult> topLinks;
     private Label topLinksLabel;
     private Rectangle screenDivider;
+    private static final String FONT = "verdana";
 
     // Getters
     public TextField getCrawlTextField() { return crawlTextField; }
@@ -29,7 +30,7 @@ public class PageView extends Pane {
     public TextField getSearchWordTextField() { return searchWordTextField; }
     public Button getSearchWordButton() { return searchWordButton; }
     public RadioButton getPageRankButton() { return pageRankButton; }
-    public ComboBox getSearchQuantity() { return searchQuantity; }
+    public ComboBox<Integer> getSearchQuantity() { return searchQuantity; }
     public ListView<SearchResult> getTopLinks() { return topLinks; }
     public Label getTopLinksLabel() { return topLinksLabel; }
     public Rectangle getScreenDivider() { return screenDivider; }
@@ -52,7 +53,7 @@ public class PageView extends Pane {
         searchWordTextField = new TextField();
         searchWordButton = new Button("Search");
         pageRankButton = new RadioButton("Page Rank");
-        searchQuantity = new ComboBox();
+        searchQuantity = new ComboBox<>();
         searchQuantityRequest = new Label("How many search results?");
         topLinks = new ListView<>();
         topLinksLabel = new Label("Top links:");
@@ -63,7 +64,7 @@ public class PageView extends Pane {
          *
          * */
 
-        crawlRequest.setFont(Font.font("verdana", 15));
+        crawlRequest.setFont(Font.font(FONT, 15));
         crawlRequest.relocate(10, 10);
         // Makes the TextField bigger because the input will be a link and likely rather long
         crawlTextField.setPrefSize(450, 20);
@@ -75,7 +76,7 @@ public class PageView extends Pane {
          * Search
          *
          * */
-        searchRequest.setFont(Font.font("verdana", 15));
+        searchRequest.setFont(Font.font(FONT, 15));
         searchRequest.relocate(10, 80);
 
         searchWordTextField.setPrefSize(200, 20);
@@ -84,7 +85,7 @@ public class PageView extends Pane {
         searchWordButton.relocate(220, 110);
 
         // Page rank checker
-        pageRankButton.setFont(Font.font("verdana", 12));
+        pageRankButton.setFont(Font.font(FONT, 12));
         pageRankButton.relocate(10, 145);
 
         // Drop down to select the amount of searches to provide
@@ -98,7 +99,7 @@ public class PageView extends Pane {
         // Sets the default selection to 10
         searchQuantity.getSelectionModel().select(9);
 
-        searchQuantityRequest.setFont(Font.font("verdana", 12));
+        searchQuantityRequest.setFont(Font.font(FONT, 12));
         searchQuantityRequest.relocate(75, 175);
 
         // List of top 10
@@ -116,7 +117,7 @@ public class PageView extends Pane {
                 new CornerRadii(0), new BorderWidths(2))));
 
         topLinksLabel.relocate(700, 20);
-        topLinksLabel.setFont(Font.font("verdana", 15));;
+        topLinksLabel.setFont(Font.font(FONT, 15));
 
         getChildren().addAll(crawlTextField, crawlRequest, crawlButton, searchRequest, searchWordTextField,
                 searchWordButton, pageRankButton, searchQuantity, searchQuantityRequest, topLinks, screenDivider,

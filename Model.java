@@ -5,9 +5,9 @@ import java.util.List;
 public class Model extends FileControl implements ProjectTester {
 
     // Instantiate classes
-    public Crawler crawlClass;
-    public SearchData searchDataClass;
-    public SearchEngine searchClass;
+    private Crawler crawlClass;
+    private SearchData searchDataClass;
+    private SearchEngine searchClass;
 
     public Model() {
         crawlClass = new Crawler();

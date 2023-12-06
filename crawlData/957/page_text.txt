@@ -1,0 +1,10 @@
+
+pear
+banana
+pear
+cherry
+cherry
+fig
+kiwi
+lime
+apple

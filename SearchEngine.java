@@ -32,8 +32,8 @@ public class SearchEngine extends FileControl {
             return null;
         }
 
-        for (String link : linkLocations.keySet()) {
-            String[] fileText = readFile(CRAWLPATHSTRING + linkLocations.get(link),
+        for (Map.Entry<String, Integer> link : linkLocations.entrySet()) {
+            String[] fileText = readFile(CRAWLPATHSTRING + link.getValue(),
                     "/title_and_link.txt").split("\\R");
 
             String fileTitle = fileText[0];

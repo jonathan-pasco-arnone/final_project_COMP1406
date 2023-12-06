@@ -1,0 +1,6 @@
+
+pear
+fig
+apricot
+orange
+fig

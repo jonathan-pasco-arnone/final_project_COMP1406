@@ -36,18 +36,18 @@ public abstract class FileControl {
         }
         return data.toString();
     }
-    public void writeFile(String new_text, String path, String filename) throws IOException {
+    public void writeFile(String newText, String path, String filename) throws IOException {
         // First read the contents of the file
         String contents = readFile(path, filename);
         // If the file was found
         if (contents != null) {
-            new_text = contents + new_text;
+            newText = contents + newText;
         }
         // Write everything to the new file
         try (DataOutputStream fileWriter = new DataOutputStream(new FileOutputStream("./" + path + filename))) {
 
             // Write each character individually
-            for (char letter : new_text.toCharArray()) {
+            for (char letter : newText.toCharArray()) {
                 fileWriter.write(letter);
             }
         }
