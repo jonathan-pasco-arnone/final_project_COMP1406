@@ -1,0 +1,13 @@
+
+fig
+pear
+kiwi
+lime
+pear
+papaya
+cherry
+apricot
+fig
+banana
+lime
+apricot

@@ -1,0 +1,11 @@
+
+apple
+peach
+orange
+fig
+papaya
+fig
+apple
+apricot
+orange
+papaya

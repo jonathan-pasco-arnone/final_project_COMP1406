@@ -10,18 +10,18 @@ import java.util.List;
 public class PageView extends Pane {
 
     // Variables
-    private TextField crawlTextField;
-    private Label crawlRequest;
-    private Button crawlButton;
-    private Label searchRequest;
-    private TextField searchWordTextField;
-    private Button searchWordButton;
-    private RadioButton pageRankButton;
-    private ComboBox<Integer> searchQuantity;
-    private Label searchQuantityRequest;
-    private ListView<SearchResult> topLinks;
-    private Label topLinksLabel;
-    private Rectangle screenDivider;
+    private final TextField crawlTextField;
+    private final Label crawlRequest;
+    private final Button crawlButton;
+    private final Label searchRequest;
+    private final TextField searchWordTextField;
+    private final Button searchWordButton;
+    private final RadioButton pageRankButton;
+    private final ComboBox<Integer> searchQuantity;
+    private final Label searchQuantityRequest;
+    private final ListView<SearchResult> topLinks;
+    private final Label topLinksLabel;
+    private final Rectangle screenDivider;
     private static final String FONT = "verdana";
 
     // Getters

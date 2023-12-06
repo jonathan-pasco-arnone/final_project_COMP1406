@@ -3,7 +3,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
-public class Crawler extends FileControl implements Serializable {
+public class Crawler extends FileControl {
     private void generateOutgoingLinkS(Hashtable<String, Integer> locationsOfLinks) throws IOException {
         File[] directories = new File(CRAWLPATHSTRING).listFiles(File::isDirectory);
         for (File folder : directories) {

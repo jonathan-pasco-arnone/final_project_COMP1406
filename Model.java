@@ -42,10 +42,7 @@ public class Model extends FileControl implements ProjectTester {
         return searchDataClass.getOutgoingLinks(url);
     }
 
-    public List<String> getIncomingLinks(String url) {
-        return searchDataClass.getIncomingLinks(url);
-
-    }
+    public List<String> getIncomingLinks(String url) { return searchDataClass.getIncomingLinks(url); }
 
     public double getPageRank(String url) {
         return searchDataClass.getPageRank(url);
@@ -63,8 +60,6 @@ public class Model extends FileControl implements ProjectTester {
         return searchDataClass.getTFIDF(url, word);
     }
 
-    public List<SearchResult> search(String query, boolean boost, int X) {
-        return searchClass.search(query, boost, X);
-    }
+    public List<SearchResult> search(String query, boolean boost, int X) { return searchClass.search(query, boost, X); }
 
 }
