@@ -1,18 +1,13 @@
 import java.io.*;
 
-public class FileControl {
+public abstract class FileControl {
     public static final String PARSEDPATHSTRING = "parsedData/";
     public static final String CRAWLPATHSTRING = "crawlData/";
-    public boolean serialize(String path, String filename, Object object) {
-        try {
-            FileOutputStream fileOutputStream = new FileOutputStream(path + filename);
-            ObjectOutputStream outputtingLinkLocations = new ObjectOutputStream(fileOutputStream);
-            outputtingLinkLocations.writeObject(object);
-            outputtingLinkLocations.close();
-            return true;
-        } catch (IOException e) {
-            return false;
-        }
+    public void serialize(String path, String filename, Object object) throws IOException {
+        FileOutputStream fileOutputStream = new FileOutputStream(path + filename);
+        ObjectOutputStream outputtingLinkLocations = new ObjectOutputStream(fileOutputStream);
+        outputtingLinkLocations.writeObject(object);
+        outputtingLinkLocations.close();
     }
     public Object deserialize(String path, String filename) {
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(path + filename))) {
