@@ -69,7 +69,6 @@ public class Controller extends Application {
         // Adding everything to the pane
         aPane.getChildren().addAll(view);
 
-//        System.out.println(model.search("coconut fig cherry peach peach", true, 10));
     }
 
     public static void main(String[] args) {
