@@ -1,6 +1,6 @@
 public class SingleSearchResult implements SearchResult {
-    private String title;
-    private double score;
+    private final String title;
+    private final double score;
     public String getTitle() { return title; }
 
     public double getScore() { return score; }
