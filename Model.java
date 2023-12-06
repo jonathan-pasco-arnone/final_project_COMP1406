@@ -1,3 +1,4 @@
+// The Model portion of the MVC
 import java.util.Hashtable;
 import java.util.List;
 

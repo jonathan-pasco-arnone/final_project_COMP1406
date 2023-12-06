@@ -1,3 +1,4 @@
+// The Controller portion of the MVC
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

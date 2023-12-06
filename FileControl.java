@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.Hashtable;
 
 public class FileControl {
     public static final String PARSEDPATHSTRING = "parsedData/";

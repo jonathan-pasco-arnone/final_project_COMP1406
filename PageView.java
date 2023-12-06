@@ -1,3 +1,4 @@
+// The View portion of the MVC
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;

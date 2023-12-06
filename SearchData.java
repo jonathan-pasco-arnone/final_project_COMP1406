@@ -4,7 +4,6 @@ import java.util.Hashtable;
 import java.util.List;
 
 import static java.lang.Math.log;
-import static java.lang.System.currentTimeMillis;
 
 public class SearchData extends FileControl {
     private final Hashtable<String, Integer> linkLocations;

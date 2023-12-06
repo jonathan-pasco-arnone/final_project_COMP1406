@@ -1,6 +1,4 @@
 import java.util.*;
-
-import static java.lang.Math.cos;
 import static java.lang.Math.log;
 
 public class SearchEngine extends FileControl {
